@@ -1,5 +1,9 @@
+"""
+TODO: DOCSTRING
+"""
+
 import argparse
-import commands
+import pip2.commands as commands
 
 parser = argparse.ArgumentParser(prog='pip2')
 subparsers = parser.add_subparsers()
