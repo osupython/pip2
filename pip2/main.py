@@ -3,7 +3,7 @@ TODO: DOCSTRING
 """
 
 import argparse
-import pip2.commands as commands
+import commands
 
 parser = argparse.ArgumentParser(prog='pip2')
 subparsers = parser.add_subparsers()
