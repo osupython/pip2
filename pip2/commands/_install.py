@@ -8,5 +8,9 @@ def run(args):
     """
     TODO: DOCSTRING
     """
-    print("Recieved {0}".format(args))
-    distutils2.install.install(args.package_name)
+    print("Received {0}".format(args))
+
+    if args.editable:
+        install_editable()
+
+    #distutils2.install.install(args.package_name)
