@@ -2,7 +2,7 @@
 TODO: DOCSTRING
 """
 
-import pip2.commands
+from .. import commands
 
 def test_install():
     """
