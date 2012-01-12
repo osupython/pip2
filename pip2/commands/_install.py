@@ -10,4 +10,4 @@ def run(args):
     """
     print("Received {0}".format(args))
 
-    #distutils2.install.install(args.package_name)
+    distutils2.install.install(args.package_name)
