@@ -2,9 +2,9 @@
 TODO: DOCSTRING
 """
 
-import parser
+from . import pip_parser
 
-command_parser = parser.create_parser()
+parser = pip_parser.create_parser()
 
-args = command_parser.parse_args()
+args = parser.parse_args()
 args.func(args)
