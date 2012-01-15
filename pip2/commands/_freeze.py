@@ -13,5 +13,6 @@ def run(args):
     distributions = distutils2.database.get_distributions()
     
     print("----- Installed Distributions -----\n")
+    
     for dis in distributions:
         print(dis.name)
