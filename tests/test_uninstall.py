@@ -1,7 +1,7 @@
 """
 TODO: DOCSTRING
 """
-from .. import commands
+import pip2.commands
 
 def test_uninstall():
     """
