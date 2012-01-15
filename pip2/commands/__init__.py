@@ -2,7 +2,7 @@
 TODO: DOCSTRING
 """
 
-import _install, _uninstall, _search, _freeze
+from commands import _install, _uninstall, _search, _freeze
 
 def install(args):
     """
