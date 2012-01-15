@@ -9,4 +9,9 @@ def run(args):
     TODO: DOCSTRING
     """
     print("Recieved {0}".format(args))
-    print(distutils2.database.get_distributions())
+    
+    distributions = distutils2.database.get_distributions()
+    
+    print("----- Installed Distributions -----\n")
+    for dis in distributions:
+        print(dis.name)

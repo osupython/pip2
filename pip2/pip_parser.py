@@ -1,5 +1,5 @@
 import argparse
-from . import commands
+import commands
 
 def create_parser():
     parser = argparse.ArgumentParser(prog='pip2')

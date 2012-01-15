@@ -2,7 +2,7 @@
 TODO: DOCSTRING
 """
 
-from . import pip_parser
+import pip_parser
 
 parser = pip_parser.create_parser()
 
