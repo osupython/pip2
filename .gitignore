@@ -3,7 +3,7 @@ tests/test-scratch/*
 tests/test-cache/*
 tests/packages/FSPkg/FSPkg.egg-info
 testenv
-pip.egg-info/*
+pip2.egg-info/*
 ScriptTest-*.egg
 virtualenv-*.egg
 nose-*.egg/*
@@ -22,3 +22,4 @@ pip-log.txt
 pip.log
 *.~
 .idea/*
+*.swp
