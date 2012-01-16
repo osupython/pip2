@@ -9,4 +9,13 @@ def run(args):
     Checks argument 'args' for various install flags (such as --editable) and installs
     'args.package_name' using distutils2 library.
     """
-    distutils2.install.install(args.package_name)
+    try:
+        success = distutils2.install.install(args.package_name)
+    
+        if success:
+            print("Successfully installed: {0}".format(args.package_name))
+        if not success:
+            print("Failed to install package: {0}".format(args.package_name))
+    except:
+        print("Failed to install package: {0}".format(args.package_name))
+    

@@ -6,7 +6,20 @@ import distutils2.database
 
 def run(args):
     """
-    TODO: DOCSTRING
+    Prints a list of all currently installed distributions. Checks the args
+    variable for display options.
     """
     print("Recieved {0}".format(args))
-    print(distutils2.database.get_distributions())
+    
+    distributions = distutils2.database.get_distributions()
+    
+    print("---------- Installed Distributions ----------\n")
+    
+    #display distribution name and version
+    if args.long:
+        for dis in distributions:
+            print('{:<30}'.format(dis.name) + '{:>15}'.format(dis.version))
+    #just display the name
+    else:
+        for dis in distributions:
+            print(dis.name)
