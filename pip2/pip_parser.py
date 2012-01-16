@@ -19,6 +19,7 @@ def create_parser():
     parser_search.set_defaults(func=pip2.commands.search)
 
     parser_freeze = subparsers.add_parser('freeze')
+    parser_freeze.add_argument('-l', '--long', action='store_true')
     parser_freeze.set_defaults(func=pip2.commands.freeze)
 
     return parser
