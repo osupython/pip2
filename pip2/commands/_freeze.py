@@ -13,12 +13,12 @@ def run(args):
     
     distributions = distutils2.database.get_distributions()
     
-    print("---------- Installed Distributions ----------\n")
+    print("---------- Installed Packages ----------\n")
     
     #display distribution name and version
     if args.long:
         for dis in distributions:
-            print('{:<30}'.format(dis.name) + '{:>15}'.format(dis.version))
+            print('{:<25}'.format(dis.name) + '{:>15}'.format(dis.version))
     #just display the name
     else:
         for dis in distributions:
