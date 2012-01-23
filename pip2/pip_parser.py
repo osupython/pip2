@@ -17,6 +17,7 @@ def create_parser():
     parser_search = subparsers.add_parser('search')
     parser_search.add_argument('package_name')
     parser_search.add_argument('-i', '--index-url', default=False)
+    parser_search.add_argument('-v', '--version', default=False)
     parser_search.set_defaults(func=pip2.commands.search)
 
     parser_freeze = subparsers.add_parser('freeze')
