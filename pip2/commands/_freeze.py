@@ -18,7 +18,7 @@ def run(args):
     #display distribution name and version
     if args.long:
         for dis in distributions:
-            print('{:<25}'.format(dis.name) + '{:>15}'.format(dis.version))
+            print("{:<25}".format(dis.name) + "{:>15}".format(dis.version))
     #just display the name
     else:
         for dis in distributions:
