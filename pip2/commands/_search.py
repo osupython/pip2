@@ -3,6 +3,7 @@ Search command built on top of the distutils.pypi.simple crawler
 """
 
 #search returns a ReleasesList which is a list of ReleaseInfo's
+
 from distutils2.pypi.dist import ReleasesList, ReleaseInfo
 from distutils2.pypi.simple import Crawler
 from distutils2.pypi.errors import ProjectNotFound, ReleaseNotFound
@@ -84,7 +85,7 @@ def search_version(crawler, args):
             return False #failure
         except IrrationalVersionError:
             print("The specified version does not conform to any known standards. Version expressions should "+\
-                  "follow the standards located in PEP345\nVersion Expression: {0}".format(args.version))
+                  "follow the standards located in PEP345.\nVersion Expression: {0}".format(args.version))
             return False #failure
         except ValueError as e:
             print("Value Error: {0}".format(e))

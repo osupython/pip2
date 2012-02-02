@@ -3,8 +3,6 @@ import pip2.commands
 
 def create_parser():
     parser = argparse.ArgumentParser(prog='pip2')
-    #parser.add_argument('-i', '--index-url', default=False)
-    #parser.add_argument('-v', '--version', default=False)
     subparsers = parser.add_subparsers()
 
     parser_install = subparsers.add_parser('install')
