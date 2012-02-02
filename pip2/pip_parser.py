@@ -23,5 +23,8 @@ def create_parser():
     parser_freeze = subparsers.add_parser('freeze')
     parser_freeze.add_argument('-l', '--long', action='store_true')
     parser_freeze.set_defaults(func=pip2.commands.freeze)
+    
+    parser_bundle = subparsers.add_parser('bundle')
+    parser_bundle.set_defaults(func=pip2.commands.bundle)
 
     return parser
