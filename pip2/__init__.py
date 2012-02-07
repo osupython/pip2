@@ -1,9 +1,12 @@
 __version__ = '0.0.1'
 
-import pip2.parser
+import pip_parser
 
 def main():
-    pass
+    parser = pip_parser.create_parser()
 
-if __name__=='__main__':
+    args = parser.parse_args()
+    args.func(args)
+
+if __name__ == '__main__':
     main()
