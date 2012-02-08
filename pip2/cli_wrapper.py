@@ -12,3 +12,15 @@ def install(args):
         print("Failed to install {0}.".format(failed))
 
     return
+
+def freeze():
+    distributions = commands.freeze.freeze()
+    
+    print("----- Installed Packages -----\n")
+    for dis in distributions:
+        print(dis.name)
+    print("\nThere are {0} installed packages".format(len(distributions)))
+    
+    return
+    
+    

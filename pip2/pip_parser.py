@@ -9,4 +9,7 @@ def create_parser():
     parser_install.add_argument('package_list', nargs='+')
     parser_install.set_defaults(func=cli_wrapper.install)
     
+    parser_freeze = subparsers.add_parser('freeze')
+    parser_freeze.set_defaults(func=cli_wrapper.freeze)
+    
     return parser
