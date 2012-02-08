@@ -1,14 +1,13 @@
 import mock
-import mock.MagicMock as MagicMock
 import pip2.commands.freeze
 
 class testFreezeAPI():
     
     #should be a magicmock object that is passed in
-    @mock.patch.object(pip2.commands.freeze, 'func')
+    @mock.patch.object(pip2.commands.freeze, 'get_distributions')
     def test_freeze_return_dis_iter(self, mock_iter):
         #mock object for generator function that yields all installed dists.
-        assert isinstance(mock_iter, MagicMock)
+        assert isinstance(mock_iter, mock.MagicMock)
         get_distributions = mock_iter.iter.return_value
         #mock object for the distribution list 
         #used to populate the generator
