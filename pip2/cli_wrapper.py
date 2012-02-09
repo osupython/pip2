@@ -1,8 +1,8 @@
-import commands.install
+import pip2.commands.install
 import sys
 
 def install(args):
-    result = commands.install.install(args.package_list)
+    result = pip2.commands.install.install(args.package_list)
 
     if result['installed'] != []:
         successful = " ".join(map(str, result['installed']))

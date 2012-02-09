@@ -1,5 +1,5 @@
 import argparse
-import cli_wrapper
+import pip2.cli_wrapper
 
 def create_parser():
     parser = argparse.ArgumentParser(prog='pip2')
@@ -7,7 +7,7 @@ def create_parser():
 
     parser_install = subparsers.add_parser('install')
     parser_install.add_argument('package_list', nargs='+')
-    parser_install.set_defaults(func=cli_wrapper.install)
+    parser_install.set_defaults(func=pip2.cli_wrapper.install)
     
     parser_freeze = subparsers.add_parser('freeze')
     parser_freeze.set_defaults(func=cli_wrapper.freeze)
