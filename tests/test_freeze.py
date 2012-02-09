@@ -8,7 +8,7 @@ class testFreezeAPI():
     def test_freeze_return_dis_iter(self, mock_iter):
         #mock object for generator function that yields all installed dists.
         #assert isinstance(mock_iter, mock.MagicMock)
-        get_distributions = mock_iter.iter.return_value
+        get_dists = mock_iter.iter.return_value
         #mock object for the distribution list 
         #used to populate the generator
         dis1 = mock.Mock()
@@ -20,7 +20,7 @@ class testFreezeAPI():
     
         distributions = [dis1, dis2, dis3]
         iterator = iter(distributions)
-        get_distributions.__iter__.return_value = iterator
+        get_dists.__iter__.return_value = iterator
         
         expected = ['test_package1', 'test_package2', 'test_package3']
         
