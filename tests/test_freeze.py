@@ -7,15 +7,15 @@ class testFreezeAPI():
     @mock.patch.object(pip2.commands.freeze, 'get_distributions')
     def test_freeze_return_dis_iter(self, mock_iter):
         #mock object for generator function that yields all installed dists.
-        assert isinstance(mock_iter, mock.MagicMock)
+        #assert isinstance(mock_iter, mock.MagicMock)
         get_distributions = mock_iter.iter.return_value
         #mock object for the distribution list 
         #used to populate the generator
-        dis1 = mock()
+        dis1 = mock.Mock()
         dis1.name = 'test_package1'
-        dis2 = mock()
+        dis2 = mock.Mock()
         dis2.name = 'test_package2'
-        dis3 = mock()
+        dis3 = mock.Mock()
         dis3.name = 'test_package3'
     
         distributions = [dis1, dis2, dis3]
