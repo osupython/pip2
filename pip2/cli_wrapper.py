@@ -1,4 +1,5 @@
 import pip2.commands.install
+import pip2.commands.freeze
 import sys
 
 def install(args):
@@ -13,14 +14,11 @@ def install(args):
 
     return
 
-def freeze():
-    distributions = commands.freeze.freeze()
+def freeze(args):
+    distributions = pip2.commands.freeze.freeze()
     
-    print("----- Installed Packages -----\n")
     for dis in distributions:
-        print(dis.name)
-    print("\nThere are {0} installed packages".format(len(distributions)))
-    
+        print(dis)
     return
     
     

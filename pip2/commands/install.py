@@ -1,12 +1,10 @@
 import distutils2.install
 
-func = distutils2.install.install
-
 def install(package_list):
     result = {'installed':[], 'failed':[]}
 
     for package in package_list:
-        if func(package):
+        if distutils2.install.install(package):
             result['installed'].append(package)
         else:
             result['failed'].append(package)
