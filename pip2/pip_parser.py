@@ -10,6 +10,6 @@ def create_parser():
     parser_install.set_defaults(func=pip2.cli_wrapper.install)
     
     parser_freeze = subparsers.add_parser('freeze')
-    parser_freeze.set_defaults(func=cli_wrapper.freeze)
+    parser_freeze.set_defaults(func=pip2.cli_wrapper.freeze)
     
     return parser
