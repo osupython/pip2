@@ -1,5 +1,6 @@
 import pip2.commands.install
 import pip2.commands.freeze
+import pip2.commands.search
 import sys
 
 def install(args):
@@ -20,5 +21,14 @@ def freeze(args):
     for dis in distributions:
         print(dis)
     return
+
+def search(args):
+    results = pip2.commands.search.search(args.project)
+    
+    # ----- to do -----
+    # format/display results
+    
+    return
+    
     
     
