@@ -23,10 +23,17 @@ def freeze(args):
     return
 
 def search(args):
-    results = pip2.commands.search.search(args.project)
+    results, matches = pip2.commands.search.search(args.package)
     
-    # ----- to do -----
-    # format/display results
+    #for each package
+    for res_key in results.keys():
+        #print the package name and summary
+        print("{0} - {1}".format(res_key, results[res_key]))
+        #if the user already has the package installed print their installed version
+        #and the latest version found on the index
+        if res_key in matches:
+            print("INSTALLED: {0}\nLATEST   : {1}".format(matches[res_key]['installed'], 
+                                                          matches[res_key]['latest']))
     
     return
     

@@ -5,7 +5,6 @@ import pip2.cli_wrapper
 import distutils2.database 
 from io import StringIO
 
-
 @mock.patch.object(distutils2.database, 'get_distributions')
 class TestFreezeAPI():
     
