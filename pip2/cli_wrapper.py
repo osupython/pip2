@@ -1,7 +1,7 @@
 import pip2.commands.install
 import pip2.commands.freeze
 import pip2.commands.search
-import sys, os
+from pip2.util import getTerminalSize
 
 def install(args):
     result = pip2.commands.install.install(args.package_list)
@@ -25,7 +25,8 @@ def freeze(args):
 
 def search(args):
     results, matches = pip2.commands.search.search(args.package)
-    terminal_width = 80 #get actual terminal width somehow?
+    terminal_width = getTerminalSize()[0]
+    print(terminal_width)
     name_len = 26 #package name alotted this many characters
     # package summary alotted this many characters per line, - 4 is for the ' - ' and 
     # leaving one extra space at end
