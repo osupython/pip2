@@ -20,21 +20,21 @@ def freeze(args):
     
     for dis in distributions:
         print(dis)
+        
     return
 
 def search(args):
     results, matches = pip2.commands.search.search(args.package)
     
-    #for each package
+    #for each search result
     for res_key in results.keys():
         #print the package name and summary
         print("{0} - {1}".format(res_key, results[res_key]))
         #if the user already has the package installed print their installed version
         #and the latest version found on the index
-        if res_key in matches:
-            print("INSTALLED: {0}\nLATEST   : {1}".format(matches[res_key]['installed'], 
-                                                          matches[res_key]['latest']))
-    
+        if res_key.lower() in matches.keys():
+            print("INSTALLED: {0}\nLATEST   : {1}".format(matches[res_key.lower()]['installed'], 
+                                                          matches[res_key.lower()]['latest']))
     return
     
     
