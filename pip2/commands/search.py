@@ -20,7 +20,13 @@ def search(package):
         raise
     
     #get installed packages for comparisons against search results (will also need version numbers eventually)
-    installed = [dis.lower() for dis in pip2.commands.freeze.freeze()]
+    installed = pip2.commands.freeze.freeze(version = True)
+    
+    # convert all keys to lowercase for easy matching
+    installed_low = dict()
+    for dist_name in installed.keys():
+        installed_low[dist_name.lower()] = installed[dist_name]
+        
     #search_projects returns a list of projects
     try: #temp for future ref
         projects = client.search_projects(name = package)
@@ -37,8 +43,9 @@ def search(package):
         
         results[project.name] = release.metadata['summary']
         #if this package from search results is already installed then keep track of it
-        if project.name.lower() in installed:
-            matches[project.name.lower()] = {'installed':1.0, 'latest':release.version}
+        if project.name.lower() in installed_low.keys():
+            matches[project.name.lower()] = {'installed':installed_low[project.name.lower()]['version'], 
+                                             'latest':release.version}
         
     return results, matches
 

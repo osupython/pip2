@@ -16,17 +16,20 @@ def install(args):
     return
 
 def freeze(args):
-    distributions = pip2.commands.freeze.freeze()
+    distributions = pip2.commands.freeze.freeze(args.version)
     
-    for dis in distributions:
-        print(dis)
+    for dist_name in distributions.keys():
+        if args.version:
+            print('{0:<30}{1}'.format(dist_name[:30], distributions[dist_name]['version']))
+        else:
+            print(dist_name)
         
     return
 
 def search(args):
     results, matches = pip2.commands.search.search(args.package)
     terminal_width = getTerminalSize()[0]
-    print(terminal_width)
+    
     name_len = 26 #package name alotted this many characters
     # package summary alotted this many characters per line, - 4 is for the ' - ' and 
     # leaving one extra space at end
