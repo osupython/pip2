@@ -32,11 +32,15 @@ def search(package):
         projects = client.search_projects(name = package)
     except:
         raise
-    
+
     #for each project, which is really just a releasesList 
     for project in projects:
+        #print(project)
         #gets the latest release
         try: #temp for future ref. Sometimes a release can't be found or version number can't be rationalized
+            #releases = project.fetch_releases()
+            #print(releases)
+            #release = releases[0]
             release = project.releases[0]
         except:
             raise
