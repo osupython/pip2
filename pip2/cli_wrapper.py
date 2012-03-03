@@ -32,7 +32,7 @@ def freeze(args):
     return
 
 def search(args):
-    results, matches = pip2.commands.search.search(args.package)
+    results = pip2.commands.search.search(args.package)
     terminal_width = getTerminalSize()[0]
     
     name_len = 26 #package name alotted this many characters
@@ -45,21 +45,21 @@ def search(args):
         # how much of the summary we have printed
         printed = 0
         #get as much as can fit on the first line
-        summary = results[res_key][:sum_len]
+        summary = results[res_key]['summary'][:sum_len]
         result = "{0:<{2}} - {1}".format(res_key[:name_len], summary, name_len)
         print(result)
         printed += sum_len
         # while we haven't printed all of the summary
-        while(printed) < (len(results[res_key])):
+        while(printed) < (len(results[res_key]['summary'])):
             # +3 is to compensate for ' - '
-            result = " "*(name_len+3) + results[res_key][printed:(printed+sum_len)]
+            result = " "*(name_len+3) + results[res_key]['summary'][printed:(printed+sum_len)]
             print(result)
             printed += sum_len
         #if the user already has the package installed print their installed version
         #and the latest version found on the index
-        if res_key.lower() in matches.keys():
-            print("   INSTALLED: {0}\n   LATEST   : {1}".format(matches[res_key.lower()]['installed'], 
-                                                                matches[res_key.lower()]['latest']))
+        if ('installed_version' in results[res_key] and 'latest_version' in results[res_key]):
+            print("   INSTALLED: {0}\n   LATEST   : {1}".format(results[res_key]['installed_version'], 
+                                                                results[res_key]['latest_version']))
     return
     
     

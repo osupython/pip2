@@ -7,11 +7,8 @@ def search(package):
     the 'package' parameter, the default is the http://python.org/pypi index
     """
 
-    #dictionary to hold results. Key is package name, value is summary of package
+    #dictionary to hold results. Key is package name, value is dict with summary and match info
     results = dict()
-    #dictionary to hold matches of search results and installed packages
-    #key is package name and value is dictionary with installed version and queried version
-    matches = dict()
 
     #create the client to connect to package indexes
     try: #temp for future ref, fail gracefully
@@ -38,20 +35,19 @@ def search(package):
         #print(project)
         #gets the latest release
         try: #temp for future ref. Sometimes a release can't be found or version number can't be rationalized
-            #releases = project.fetch_releases()
-            #print(releases)
-            #release = releases[0]
             release = project.releases[0]
         except:
             raise
         
-        results[project.name] = release.metadata['summary']
+        results[project.name] = {}
+        results[project.name]['summary'] = release.metadata['summary']
+        
         #if this package from search results is already installed then keep track of it
         if project.name.lower() in installed_low.keys():
-            matches[project.name.lower()] = {'installed':installed_low[project.name.lower()]['version'], 
-                                             'latest':release.version}
+            results[project.name]['installed_version'] = installed_low[project.name.lower()]['version']
+            results[project.name]['latest_version'] = release.version
         
-    return results, matches
+    return results
 
 
         
