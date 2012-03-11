@@ -1,8 +1,8 @@
 import mock
 import pip2.commands.install
-import distutils2.install
+import packaging.install
 
-@mock.patch.object(distutils2.install, 'install')
+@mock.patch.object(packaging.install, 'install')
 class TestInstallAPI():
 
     def test_install_single_package(self, mock_func):
@@ -38,7 +38,7 @@ class TestInstallAPI():
         assert result['failed'] == expected
 
 
-@mock.patch.object(distutils2.install, 'install')
+@mock.patch.object(packaging.install, 'install')
 class TestInstallCLI():
     
     def test_install_single_package(self, mock_func):

@@ -1,4 +1,4 @@
-from distutils2.pypi import xmlrpc
+from packaging.pypi import xmlrpc
 import pip2.commands.freeze
 
 def search(package):
