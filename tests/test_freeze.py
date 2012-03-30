@@ -1,10 +1,10 @@
 import mock, sys, inspect
 import pip2.commands.freeze
 import pip2.cli_wrapper
-import distutils2.database 
+import packaging.database 
 from io import StringIO
 
-@mock.patch.object(distutils2.database, 'get_distributions')
+@mock.patch.object(packaging.database, 'get_distributions')
 class TestFreezeAPI():
     
     def test_basic_freeze(self, mock_gen):
