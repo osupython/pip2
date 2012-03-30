@@ -1,5 +1,4 @@
-import mock
-import sys
+import mock, sys, inspect
 import pip2.commands.freeze
 import pip2.cli_wrapper
 import distutils2.database 
@@ -71,7 +70,6 @@ class TestFreezeAPI():
 
 @mock.patch.object(pip2.commands.freeze, 'freeze')            
 class TestFreezeCLI():
-    
     originalOut = sys.stdout
     
     #capture stdout 
@@ -79,9 +77,6 @@ class TestFreezeCLI():
         sys.stdout = result = StringIO() 
         return result
     
-    #replace stdout 
-    def tear_down(self):
-        sys.stdout = self.originalOut
     
     def test_basic_freeze(self, mock_func):
         args = mock.Mock()
@@ -99,17 +94,7 @@ class TestFreezeCLI():
         expected = "test_package1\ntest_package2\ntest_package3\n"
         
         # compare the outputs
-        try:
-            assert result.getvalue() == expected
-        # their different? print both
-        except AssertionError:
-            #print to stderr cause stdout hasn't been switched back (better practice anyways)
-            print('result  : {0}'.format(result.getvalue()), file=sys.stderr)
-            print('expected: {0}'.format(expected), file=sys.stderr)
-            raise
-        #return it to normal for next test
-        finally:
-            self.tear_down()
+        self.tear_down(result.getvalue(), expected)
             
             
     def test_freeze_version(self, mock_func):
@@ -124,18 +109,27 @@ class TestFreezeCLI():
         
         expected = '{0:<30}1.0\n{1:<30}2.0\n{2:<30}3.0\n'.format('test_package1', 'test_package2', 'test_package3')
         
+        self.tear_down(result.getvalue(), expected)
+            
+            
+    def tear_down(self, result, expected):
         # compare the outputs
         try:
-            assert result.getvalue() == expected
+            assert result == expected
         # their different? print both
         except AssertionError:
+            result = result.replace('\n', '\\n')
+            expected = expected.replace('\n', '\\n')
+            output = ("\n\nTEST FAILED" +
+                      "\nFunction: {0}".format(inspect.stack()[1][3]) +
+                      "\nResult  : {0}\n".format(result) +
+                      "\nExpected: {0}".format(expected))
             #print to stderr cause stdout hasn't been switched back (better practice anyways)
-            print('result  : {0}'.format(result.getvalue()), file=sys.stderr)
-            print('expected: {0}'.format(expected), file=sys.stderr)
+            print(output, file=sys.stderr)
             raise
         #return it to normal for next test
         finally:
-            self.tear_down()
+            sys.stdout = self.originalOut
 
 
         
