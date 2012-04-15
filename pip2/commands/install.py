@@ -8,5 +8,5 @@ def install(package_list):
             result['installed'].append(package)
         else:
             result['failed'].append(package)
-
+            
     return result
