@@ -1,26 +1,12 @@
 import packaging.database 
 
-def freeze(version = False):
-    # dictionary to hold info about installed dists.
-    # key is dist's name, value is a dictionary to hold info populated by
-    # freeze's various options
-    installed = dict()
+def freeze():
     results = list(packaging.database.get_distributions())
-    
+    installed = dict()
     for dist in results:
         installed[dist.name] = dict()
-        
-        # if the version option (-v) has been specified 
-        if version:
-            installed = _version(dist, installed)
+        installed[dist.name]['version'] = dist.version
         
     return installed
 
-
-def _version(dist, installed):
-    # populate version info for the dist
-    installed[dist.name]['version'] = dist.version
-            
-    return installed
-    
 
