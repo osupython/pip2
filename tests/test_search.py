@@ -2,11 +2,11 @@ from io import StringIO
 import inspect
 import mock, sys
 import pip2.commands.search
-import distutils2.pypi.xmlrpc
+import packaging.pypi.xmlrpc
 import pip2.commands.freeze
 
 @mock.patch.object(pip2.commands.freeze, 'freeze')
-@mock.patch.object(distutils2.pypi.xmlrpc.Client, 'search_projects')
+@mock.patch.object(packaging.pypi.xmlrpc.Client, 'search_projects')
 class TestSearchAPI():
     
     def setup(self):

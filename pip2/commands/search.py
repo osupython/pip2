@@ -16,8 +16,8 @@ def search(package):
     except:
         raise
     
-    #get installed packages for comparisons against search results (will also need version numbers eventually)
-    installed = pip2.commands.freeze.freeze(version = True)
+    #get installed packages for comparisons against search results 
+    installed = pip2.commands.freeze.freeze()
     
     # convert all keys to lowercase for easy matching
     installed_low = dict()

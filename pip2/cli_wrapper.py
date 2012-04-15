@@ -16,18 +16,11 @@ def install(args):
     return
 
 def freeze(args):
-    if args is not None:    
-        distributions = pip2.commands.freeze.freeze(args.version)
-    else:
-        distributions = pip2.commands.freeze.freeze()
-    
+    distributions = pip2.commands.freeze.freeze()
     dist_names = list(distributions.keys())
     dist_names.sort()
     for dist_name in dist_names:
-        if args.version:
-            print('{0:<30}{1}'.format(dist_name[:30], distributions[dist_name]['version']))
-        else:
-            print(dist_name)
+        print(dist_name + "==" + distributions[dist_name]['version'])
         
     return
 
