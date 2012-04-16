@@ -1,4 +1,9 @@
-import packaging.database 
+"""
+TODO: DOCSTRING
+"""
+
+import packaging.database
+
 
 def freeze():
     results = list(packaging.database.get_distributions())
@@ -6,7 +11,5 @@ def freeze():
     for dist in results:
         installed[dist.name] = dict()
         installed[dist.name]['version'] = dist.version
-        
+
     return installed
-
-
