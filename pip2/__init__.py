@@ -1,6 +1,11 @@
+"""
+TODO: DOCSTRING
+"""
+
 __version__ = '0.0.1'
 
-import pip2.pip_parser 
+import pip2.pip_parser
+
 
 def main():
     parser = pip2.pip_parser.create_parser()
