@@ -1,5 +1,11 @@
 """
-TODO: DOCSTRING
+Searches the PYPIs for packages based off of
+the 'package' parameter, the default is the http://python.org/pypi index
+
+package: search query (usually package name) as string.
+
+return: A dictionary of search results. Key is package name value is dictionary
+        containing information about the package.
 """
 
 import packaging.pypi.xmlrpc
@@ -45,6 +51,9 @@ def search(package):
             results[project.name]['summary'] = "CANNOT GET SUMMARY"
         else:
             results[project.name]['summary'] = release.metadata['summary']
+            f = results[project.name]['summary']
+            f = f.replace('\n', ' ').replace('\t', ' ').replace('  ', ' ')
+            results[project.name]['summary'] = f
             if project.name in installed.keys():
                 results[project.name]['installed_version'] = installed[project.name]['version']
                 results[project.name]['latest_version'] = release.version
