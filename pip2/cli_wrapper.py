@@ -1,5 +1,6 @@
 """
-TODO: DOCSTRING
+Formats data returned from the various commands to be displayed on command line.
+
 """
 
 import pip2.commands.install
@@ -94,7 +95,7 @@ def search(args):
         res_cnt += 1
         if res_cnt % res_page == 0:
             try:
-                input("\n{0} results displayed, press ENTER for more...\n".format(res_cnt))
+                input("\n{0}/{1} results displayed, press ENTER for more...\n".format(res_cnt, len(results.keys())))
             except KeyboardInterrupt:
                 return
     return
@@ -118,5 +119,7 @@ def _search_safe_print(string, name=None):
                 return False
             else:
                 return True
+        else:
+            return True
     else:
         return True
