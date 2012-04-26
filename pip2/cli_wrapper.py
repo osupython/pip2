@@ -10,6 +10,8 @@ import pip2.commands.search
 import pip2.util
 import sys
 
+# TODO: Add options to match pip feature set
+
 
 def install(args):
     result = pip2.commands.install.install(args.package_list)

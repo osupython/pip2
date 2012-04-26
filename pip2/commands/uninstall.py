@@ -1,5 +1,6 @@
 """
-TODO: DOCSTRING
+Uninstalls a package and returns a dictionary containing which packages
+were uninstalled successfully or unsuccessfully.
 """
 
 import packaging.install
