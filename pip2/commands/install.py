@@ -1,10 +1,11 @@
 """
-TODO: DOCSTRING
+Installs a package and returns a dictionary containing which packages
+were installed successfully or unsuccessfully.
 """
 
 import packaging.install
 
-
+# TODO: Install dependencies automatically
 def install(package_list):
     result = {'installed': [], 'failed': []}
 

@@ -1,5 +1,5 @@
 """
-TODO: DOCSTRING
+Command line argument parser
 """
 
 import argparse
