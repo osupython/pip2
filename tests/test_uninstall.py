@@ -2,9 +2,9 @@
 Mock testing for uninstall command.
 """
 
-import mock
 import pip2.commands.uninstall
-import packaging.install
+from pip2.compat import mock
+from pip2.compat import packaging
 
 
 @mock.patch.object(packaging.install, 'remove')

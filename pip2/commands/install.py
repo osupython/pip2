@@ -3,8 +3,9 @@ Installs a package and returns a dictionary containing which packages
 were installed successfully or unsuccessfully.
 """
 
-import packaging.install
 import os
+
+from pip2.compat import packaging
 
 
 def install(package_list):

@@ -1,10 +1,11 @@
-from io import StringIO
 import inspect
-import mock
 import sys
-import pip2.commands.search
-import packaging.pypi.xmlrpc
+from io import StringIO
+
 import pip2.commands.freeze
+import pip2.commands.search
+from pip2.compat import mock
+from pip2.compat import packaging
 
 
 @mock.patch.object(pip2.commands.freeze, 'freeze')

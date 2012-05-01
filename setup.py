@@ -1,6 +1,7 @@
-import sys
 import os
+import sys
 from setuptools import setup
+
 
 version = "0.0.1"
 

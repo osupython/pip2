@@ -1,10 +1,11 @@
-import mock
-import sys
 import inspect
-import pip2.commands.freeze
-import pip2.cli_wrapper
-import packaging.database
+import sys
 from io import StringIO
+
+import pip2.cli_wrapper
+import pip2.commands.freeze
+from pip2.compat import mock
+from pip2.compat import packaging
 
 
 @mock.patch.object(packaging.database, 'get_distributions')

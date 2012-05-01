@@ -8,9 +8,11 @@ return: A dictionary of search results. Key is package name value is dictionary
         containing information about the package.
 """
 
-import packaging.pypi.xmlrpc
-import pip2.commands.freeze
 import logging
+
+import pip2.commands.freeze
+from pip2.compat import packaging
+
 
 pkg_logger = logging.getLogger("packaging")
 old_lvl = pkg_logger.getEffectiveLevel()
