@@ -9,17 +9,17 @@ Contributing with Code
 Supported Python Versions
 -------------------------
 
-Pip2 only supports Python 3.2 at the moment, but there are plans to support
-versions of Python back to 2.6 (ish?).
+Pip2 currently only supports Python 3.2 and 3.3 (scheduled for release in
+August 2012), but there are plans to support versions of Python back to
+2.6-ish.
 
 Prerequisites
 -------------
 
 The following tools are required:
 
+- Python 3.2 or 3.3 (preferably both)
 - Git
-- Mercurial (``hg``)
-- Python 3.2
 - pip and virtualenv
 
 You must also have a Github account and basic familiarity with the tools listed
@@ -42,17 +42,19 @@ fork::
 Installation
 ------------
 
-Create and activate a virtualenv for pip2 development with Python 3.2::
+Create and activate a virtualenv for pip2 development. For example, if you are
+developing with Python 3.2::
 
     $ virtualenv --python=python3.2 pip2-dev-py3.2
     $ source pip2-dev-py3.2/bin/activate
 
-Pip2 depends on distutils2, which doesn't have a recent version on PyPI. To
-install the python3 branch of distutils2 from source::
+For versions of Python prior to 3.3, pip2 depends on distutils2 which is often
+`broken`_ and/or outdated on PyPI. For now, just use pip to install from the
+python3 branch of the distutils2 repository::
 
-    $ hg clone --branch python3 http://hg.python.org/distutils2
-    $ pip install -e distutils2/
+    $ pip install http://hg.python.org/distutils2/archive/python3.tar.bz2
 
+.. _broken: http://github.com/osupython/pip2/issues/45
 
 Install pip2::
 
@@ -62,7 +64,42 @@ Install pip2::
 Running the Tests
 -----------------
 
-TODO
+Pip2 uses `nose`_ and `mock`_ for testing. To install nose::
+
+    $ pip install nose
+
+Mock has been included in Python's standard library since version 3.3. For
+versions of Python prior to 3.3::
+
+    $ pip install mock
+
+.. _nose: http://nose.readthedocs.org/
+.. _mock: http://www.voidspace.org.uk/python/mock/
+
+Now, run the unit tests from the root directory of the pip2 repository. You
+should run these tests frequently as you are modifying the code::
+
+    $ nosetests
+
+Once your changes are working well in your development environment, `tox`_ can
+be used to run these same tests in a clean environment under multiple versions
+of Python. First, install tox::
+
+    $ pip install tox
+
+The first time you run it, tox will take a while (quite a few minutes) to build
+virtualenvs and install the required packages::
+
+    $ tox
+
+Subsequent tox runs will reuse the existing virtualenvs and run much faster.
+Note, however, that you may want to occasionally force the virtualenvs to be
+recreated by running `tox --recreate` to get the latest versions of pip2's
+dependencies. Run `tox --help`, visit `tox's website`_, or view the `tox.ini`
+file in pip2's repository for additional information on using tox.
+
+.. _tox: http://tox.readthedocs.org/
+.. _tox's website: http://tox.readthedocs.org/
 
 
 Contributing with Documentation
