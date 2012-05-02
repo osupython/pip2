@@ -13,21 +13,21 @@ class TestSearchAPI():
         test_proj1 = mock.Mock()
         test_proj1.name = 'test_proj1'
         test_proj1.releases = mock.MagicMock()
-        test_proj1.releases[0].version = 1.5
+        test_proj1.releases[0].version = '1.5'
         test_proj1.releases[0].metadata = {}
         test_proj1.releases[0].metadata['summary'] = 'Summary for project 1'
         
         test_proj2 = mock.Mock()
         test_proj2.name = 'test_proj2'
         test_proj2.releases = mock.MagicMock()
-        test_proj2.releases[0].version = 2.5
+        test_proj2.releases[0].version = '2.5'
         test_proj2.releases[0].metadata = {}
         test_proj2.releases[0].metadata['summary'] = 'Summary for project 2'
         
         test_proj3 = mock.Mock()
         test_proj3.name = 'test_proj3'
         test_proj3.releases = mock.MagicMock()
-        test_proj3.releases[0].version = 3.5
+        test_proj3.releases[0].version = '3.5'
         test_proj3.releases[0].metadata = {}
         test_proj3.releases[0].metadata['summary'] = 'Summary for project 3'
         
@@ -47,13 +47,13 @@ class TestSearchAPI():
 
     def test_basic_search_matches(self, mock_search_projects, mock_freeze):
         mock_search_projects.return_value = self.setup()
-        mock_freeze.return_value = {'test_proj1':{'version':1.0}, 'test_proj3':{'version':3.0}}
+        mock_freeze.return_value = {'test_proj1':{'version':'1.0'}, 'test_proj3':{'version':'3.0'}}
         
         expected = {'test_proj1':{'summary':'Summary for project 1', 
-                                  'installed_version':1.0, 'latest_version':1.5}, 
+                                  'installed_version':'1.0', 'latest_version':'1.5'}, 
                     'test_proj2':{'summary':'Summary for project 2'}, 
                     'test_proj3':{'summary':'Summary for project 3', 
-                                  'installed_version':3.0, 'latest_version':3.5}}
+                                  'installed_version':'3.0', 'latest_version':'3.5'}}
         result = pip2.commands.search.search('test')
         
         self.tear_down(result, expected)
@@ -144,8 +144,17 @@ class TestSearchCLI():
         result = self.setup()
         self.args.package = "pkgPlaceholder"
         mock_getTerminalSize.return_value = (self.term_size, None)
-        
-        assert 0
+        installed = '1.0'
+        latest = '1.5'
+        desc = 'X'*self.sum_len
+        mock_search.return_value = {self.args.package:{'summary':desc, 
+                                    'installed_version':installed, 
+                                    'latest_version':latest}}
+        expected = (self.args.package + ' '*(self.name_len - len(self.args.package)) + 
+                    self.cli_sep + desc + '\n\tINSTALLED: ' + installed + 
+                    '\n\tLATEST   : ' + latest + '\n')
+        pip2.cli_wrapper.search(self.args)
+        self.tear_down(result.getvalue(), expected)
     
     def test_basic_display_small_terminal_size(self, mock_search, mock_getTerminalSize):
         self.term_size = 60
@@ -165,7 +174,7 @@ class TestSearchCLI():
         self.test_basic_display_name_long()
         self.test_basic_display_sum_single_line()
         self.test_basic_display_sum_word_wrap()
-        #self.test_basic_display_matches()
+        self.test_basic_display_matches()
       
     def tear_down(self, result, expected):
         try:

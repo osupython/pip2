@@ -78,7 +78,8 @@ def search(args):
             print("SKIPPING RESULT: CANNOT DISPLAY UNKNOWN CHARACTERS")
             res_cnt += 1
             continue
-        if not _search_safe_print(line, res):
+        success = _search_safe_print(line, res)
+        if not success:
             res_cnt += 1
             continue
         printed += sum_len
@@ -93,7 +94,7 @@ def search(args):
         if ('installed_version' in results[res] and
             'latest_version' in results[res] and
             success):
-            print("   INSTALLED: {0}\n   LATEST   : {1}".format(results[res]['installed_version'], results[res]['latest_version']))
+            print("\tINSTALLED: {0}\n\tLATEST   : {1}".format(results[res]['installed_version'], results[res]['latest_version']))
         res_cnt += 1
         if res_cnt % res_page == 0:
             try:
