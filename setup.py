@@ -4,7 +4,8 @@ import sys
 from setuptools import setup
 
 
-version = "0.0.1"
+# If you change the version here, be sure to also change it in docs/conf.py
+version = '0.0.1.dev1'
 
 install_requires = []
 
