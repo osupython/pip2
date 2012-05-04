@@ -54,6 +54,21 @@ class TestInstallAPI():
         pip2.commands.install.install("test")
         assert mock_install.called == True
 
+    def test_install_mixed_results(self, mock_install):
+        # The current expected behavior is to allow some packages to be
+        # installed even if there other packages fail to install.  In the
+        # future, it will probably be all or nothing.  See issue #51 for more
+        # details.
+
+        returns = [True, False]
+        mock_install.side_effect = lambda *args: returns.pop(0)
+        successes = ['a-real-package']
+        failures = ['not-a-package']
+        result = pip2.commands.install.install(successes + failures)
+
+        assert result['installed'] == successes
+        assert result['failed'] == failures
+
 
 @mock.patch.object(packaging.install, 'install')
 class TestInstallCLI():

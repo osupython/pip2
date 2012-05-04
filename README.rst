@@ -13,6 +13,9 @@ Example::
     Successfully installed package2 package3
     $ pip2 install package_that_doesnt_exist_or_fails_to_install
     Failed to install package_that_doesnt_exist_or_fails_to_install
+    $ pip2 install a-real-package not-a-package
+    Successfully installed a-real-package.
+    Failed to install not-a-package.
 
 
 Freeze
