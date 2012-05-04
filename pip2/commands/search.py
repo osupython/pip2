@@ -22,6 +22,7 @@ def search(package):
     the 'package' parameter, the default is the http://python.org/pypi index
     """
     results = dict()
+
     # temp for future ref, fail gracefully
     try:
         client = packaging.pypi.xmlrpc.Client()
@@ -32,7 +33,7 @@ def search(package):
     pkg_logger.setLevel(logging.ERROR)
     # temp for future ref
     try:
-        projects = client.search_projects(name=package)
+        projects = client.search_projects(name=package, summary=package)
     except:
         raise
     finally:
@@ -46,6 +47,7 @@ def search(package):
         # version number can't be rationalized
         try:
             # get the latest release
+            project.sort_releases()
             release = project.releases[0]
         except IndexError:
             results[project.name]['summary'] = "CANNOT GET SUMMARY"
@@ -55,7 +57,8 @@ def search(package):
             f = f.replace('\n', ' ').replace('\t', ' ').replace('  ', ' ')
             results[project.name]['summary'] = f
             if project.name in installed.keys():
-                results[project.name]['installed_version'] = installed[project.name]['version']
+                results[project.name]['installed_version'] = \
+                installed[project.name]['version']
                 results[project.name]['latest_version'] = release.version
 
     return results
