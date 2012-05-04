@@ -15,13 +15,14 @@ import logging
 pkg_logger = logging.getLogger("packaging")
 old_lvl = pkg_logger.getEffectiveLevel()
 
+
 def search(package):
     """
     Searches the PYPIs for packages based off of
     the 'package' parameter, the default is the http://python.org/pypi index
     """
     results = dict()
-    
+
     # temp for future ref, fail gracefully
     try:
         client = packaging.pypi.xmlrpc.Client()
@@ -38,7 +39,7 @@ def search(package):
     finally:
         pkg_logger.setLevel(old_lvl)
     installed = pip2.commands.freeze.freeze()
-    
+
     for project in projects:
         results[project.name] = dict()
         # temp for future ref.
@@ -56,7 +57,8 @@ def search(package):
             f = f.replace('\n', ' ').replace('\t', ' ').replace('  ', ' ')
             results[project.name]['summary'] = f
             if project.name in installed.keys():
-                results[project.name]['installed_version'] = installed[project.name]['version']
+                results[project.name]['installed_version'] = \
+                installed[project.name]['version']
                 results[project.name]['latest_version'] = release.version
 
     return results

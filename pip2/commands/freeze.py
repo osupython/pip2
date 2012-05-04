@@ -1,8 +1,8 @@
 """
 Returns a dictionary containing all installed packages.
 
-return: A dictionary, key is package name value is a dictionary
-        with information about package.
+return: A dictionary, key is package name value is a dictionary with
+        information about package.
 """
 
 import packaging.database
