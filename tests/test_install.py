@@ -1,6 +1,9 @@
 import mock
 import pip2.commands.install
 import packaging.install
+import os
+import tempfile
+
 
 @mock.patch.object(packaging.install, 'install')
 class TestInstallAPI():
@@ -37,10 +40,26 @@ class TestInstallAPI():
         assert result['installed'] == []
         assert result['failed'] == expected
 
+    @mock.patch.object(packaging.install, 'install_local_project')
+    @mock.patch.object(os.path, 'exists')
+    def test_local_project(self, mock_os, mock_local, mock_install):
+        mock_local.return_value = True
+        mock_install.return_value = True
+
+        mock_os.return_value = True
+        pip2.commands.install.install("test")
+        assert mock_local.called == True
+
+        mock_os.return_value = False
+        pip2.commands.install.install("test")
+        assert mock_install.called == True
+
+
+
 
 @mock.patch.object(packaging.install, 'install')
 class TestInstallCLI():
-    
+
     def test_install_single_package(self, mock_func):
         pass
 
@@ -52,4 +71,3 @@ class TestInstallCLI():
 
     def test_install_fail_multiple_packages(self, mock_func):
         pass
-
