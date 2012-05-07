@@ -1,6 +1,7 @@
 import mock
 import pip2.commands.install
 import packaging.install
+import os
 import tempfile
 
 
@@ -40,15 +41,17 @@ class TestInstallAPI():
         assert result['failed'] == expected
 
     @mock.patch.object(packaging.install, 'install_local_project')
-    def test_local_project(self, mock_local, mock_install):
-        file1 = tempfile.NamedTemporaryFile()
-        file2 = "#"
+    @mock.patch.object(os.path, 'exists')
+    def test_local_project(self, mock_os, mock_local, mock_install):
         mock_local.return_value = True
         mock_install.return_value = True
 
-        pip2.commands.install.install(file1.name)
+        mock_os.return_value = True
+        pip2.commands.install.install("test")
         assert mock_local.called == True
-        pip2.commands.install.install(file2)
+
+        mock_os.return_value = False
+        pip2.commands.install.install("test")
         assert mock_install.called == True
 
 
