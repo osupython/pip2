@@ -1,8 +1,8 @@
-import mock
-import pip2.commands.install
-import packaging.install
 import os
-import tempfile
+
+import pip2.commands.install
+from pip2.compat import mock
+from pip2.compat import packaging
 
 
 @mock.patch.object(packaging.install, 'install')

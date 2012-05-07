@@ -5,7 +5,7 @@ return: A dictionary, key is package name value is a dictionary with
         information about package.
 """
 
-import packaging.database
+from pip2.compat import packaging
 
 
 def freeze():

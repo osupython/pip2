@@ -4,12 +4,14 @@ line.
 
 """
 
+import sys
+
 import pip2.commands.install
 import pip2.commands.uninstall
 import pip2.commands.freeze
 import pip2.commands.search
 import pip2.util
-import sys
+
 
 # TODO: Add options to match pip feature set
 

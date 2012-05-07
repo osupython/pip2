@@ -3,7 +3,7 @@ Uninstalls a package and returns a dictionary containing which packages
 were uninstalled successfully or unsuccessfully.
 """
 
-import packaging.install
+from pip2.compat import packaging
 
 
 def uninstall(package_list):
