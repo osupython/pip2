@@ -49,7 +49,7 @@ copyright = '2012, Pip2 Authors'
 # built documents.
 #
 # The short X.Y version.
-version = '0.0.1.dev1'      # If changing, update setup.py as well
+version = '0.0.1.dev1'  # If changing, update setup.py and pip2/__init__.py
 # The full version, including alpha/beta/rc tags.
 release = version
 
