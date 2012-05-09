@@ -58,7 +58,6 @@ def search(args):
         return
     # when cli_wrapper gets split into multiple files, one for each command
     # these will be global
-    res_page = 50
     term_width = pip2.util.getTerminalSize()[0]
     # separator to use for name and summary
     sep = ' - '
@@ -68,7 +67,6 @@ def search(args):
     # when summary is exactly one full line
     sum_len = term_width - name_len - len(sep) - 1
 
-    res_cnt = 0
     for res in results.keys():
         printed = 0
         # get as much as can fit on the first line
@@ -79,11 +77,9 @@ def search(args):
         # international packages have encoding issues, we just skip and move on
         except SystemError:
             print('SKIPPING RESULT: CANNOT DISPLAY UNKNOWN CHARACTERS')
-            res_cnt += 1
             continue
         success = _search_safe_print(line, res)
         if not success:
-            res_cnt += 1
             continue
         printed += sum_len
         # while we haven't printed all of the summary
@@ -100,13 +96,6 @@ def search(args):
             print('\tINSTALLED: {0}\n\tLATEST   : {1}'.format(
                   results[res]['installed_version'],
                   results[res]['latest_version']))
-        res_cnt += 1
-        if res_cnt % res_page == 0:
-            try:
-                input('\n{0}/{1}'.format(res_cnt, len(results.keys())) +
-                      ' results displayed, press ENTER for more...\n')
-            except KeyboardInterrupt:
-                return
     return
 
 
