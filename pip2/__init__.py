@@ -2,7 +2,9 @@
 Entry point for pip2
 """
 
-__version__ = '0.0.1'
+# If you change the version here, be sure to also change it in setup.py and
+# docs/conf.py
+__version__ = '0.0.1.dev1'
 
 import pip2.pip_parser
 
