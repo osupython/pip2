@@ -116,8 +116,8 @@ class TestSearchCLI():
         mock_getTerminalSize.return_value = (self.term_size, None)
         mock_search.return_value = {self.args.package: {'summary':
                                                         'summary placeholder'}}
-        expected = (self.args.package[: self.name_len] + self.cli_sep +
-                    'summary placeholder\n')
+        expected = (self.args.package + self.cli_sep + 'summary placeholder')
+        expected = expected[: (self.term_size - 1)] + '\n'
         pip2.cli_wrapper.search(self.args)
         self.tear_down(result.getvalue(), expected)
 
