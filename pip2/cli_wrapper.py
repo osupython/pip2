@@ -5,6 +5,7 @@ line.
 """
 
 import sys
+import textwrap
 
 import pip2.commands.install
 import pip2.commands.uninstall
@@ -61,19 +62,17 @@ def search(args):
     term_width = pip2.util.getTerminalSize()[0]
     # separator to use for name and summary
     sep = ' - '
-    # package name alotted this many characters
     name_len = 26
     # the '- 1' is so we don't get a newline
     # when summary is exactly one full line
     sum_len = term_width - name_len - len(sep) - 1
+    sum_fmt = textwrap.TextWrapper(sum_len)
 
     for res in results.keys():
-        printed = 0
-        # get as much as can fit on the first line
-        summary = results[res]['summary'][:sum_len]
+        summary = sum_fmt.wrap(results[res]['summary'])
         try:
-            line = '{0:<{1}}{2}{3}'.format(res[:name_len], name_len,
-                                           sep, summary)
+            line = '{0:<{1}}{2}{3}'.format(res, name_len, sep, summary.pop(0))
+            line = line[: (term_width - 1)]
         # international packages have encoding issues, we just skip and move on
         except SystemError:
             print('SKIPPING RESULT: CANNOT DISPLAY UNKNOWN CHARACTERS')
@@ -81,18 +80,13 @@ def search(args):
         success = _search_safe_print(line, res)
         if not success:
             continue
-        printed += sum_len
-        # while we haven't printed all of the summary
-        while(printed < len(results[res]['summary'])):
-            next_line = ' ' * (name_len + len(sep)) + \
-                results[res]['summary'][printed:(printed + sum_len)]
+        for line in summary:
+            next_line = ' ' * (name_len + len(sep)) + line
             success = _search_safe_print(next_line)
             if not success:
                 break
-            printed += sum_len
         if ('installed_version' in results[res] and
-            'latest_version' in results[res] and
-            success):
+            'latest_version' in results[res] and success):
             print('\tINSTALLED: {0}\n\tLATEST   : {1}'.format(
                   results[res]['installed_version'],
                   results[res]['latest_version']))
@@ -110,7 +104,7 @@ def _search_safe_print(string, name=None):
             # try and print just the package name incase the summary is causing
             # the exception
             try:
-                print('{0:<{1}}{2}'.format(name[:name_len], name_len, sep) +
+                print('{0:<{1}}{2}'.format(name, name_len, sep) +
                       'CANNOT DISPLAY SUMMARY WITH ' +
                       '({0}) ENCODING'.format(sys.getdefaultencoding()))
             except (UnicodeDecodeError, UnicodeEncodeError, UnicodeError):

@@ -55,9 +55,9 @@ def search(package):
             results[project.name]['summary'] = "CANNOT GET SUMMARY"
         else:
             results[project.name]['summary'] = release.metadata['summary']
-            f = results[project.name]['summary']
-            f = f.replace('\n', ' ').replace('\t', ' ').replace('  ', ' ')
-            results[project.name]['summary'] = f
+            #f = results[project.name]['summary']
+            #f = f.replace('\n', ' ').replace('\t', ' ').replace('  ', ' ')
+            #results[project.name]['summary'] = f
             if project.name in installed.keys():
                 results[project.name]['installed_version'] = \
                 installed[project.name]['version']
