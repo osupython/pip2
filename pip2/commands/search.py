@@ -26,16 +26,15 @@ def search(package):
         results[project.name] = dict()
         # if all releases for a project have irrational versions then the
         # releases list will be empty
-        try:
+        if project.releases:
             project.sort_releases()
             release = project.releases[0]
-        except IndexError:
-            results[project.name]['summary'] = "CANNOT GET SUMMARY"
-        else:
             results[project.name]['summary'] = release.metadata['summary']
             if project.name in installed.keys():
                 results[project.name]['installed_version'] = \
                 installed[project.name]['version']
                 results[project.name]['latest_version'] = release.version
+        else:
+            results[project.name]['summary'] = "CANNOT GET SUMMARY"
 
     return results

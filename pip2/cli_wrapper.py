@@ -59,10 +59,13 @@ def search(args):
         return
     # when cli_wrapper gets split into multiple files, one for each command
     # these will be global
-    term_width = pip2.util.getTerminalSize()[0]
     # separator to use for name and summary
     sep = ' - '
     name_len = 26
+    min_term_width = 40
+    term_width = pip2.util.getTerminalSize()[0]
+    if term_width < min_term_width:
+        term_width = min_term_width
     # the '- 1' is so we don't get a newline
     # when summary is exactly one full line
     sum_len = term_width - name_len - len(sep) - 1
@@ -99,7 +102,7 @@ def _search_safe_print(string, name=None):
     name_len = 26
     try:
         print(string)
-    except (UnicodeDecodeError, UnicodeEncodeError, UnicodeError):
+    except UnicodeError:
         if name:
             # try and print just the package name incase the summary is causing
             # the exception
@@ -107,7 +110,7 @@ def _search_safe_print(string, name=None):
                 print('{0:<{1}}{2}'.format(name, name_len, sep) +
                       'CANNOT DISPLAY SUMMARY WITH ' +
                       '({0}) ENCODING'.format(sys.getdefaultencoding()))
-            except (UnicodeDecodeError, UnicodeEncodeError, UnicodeError):
+            except UnicodeError:
                 print('SKIPPING RESULT: CANNOT DISPLAY WITH ' +
                       '({0}) ENCODING'.format(sys.getdefaultencoding()))
                 return False
