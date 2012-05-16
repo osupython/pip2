@@ -1,82 +1,110 @@
+Overview
+========
+
+The goal of this project is to create a new version of pip built on
+`distutils2/packaging`_ instead of setuptools/distribute. Pip2 is currently
+being developed as part of a senior capstone project at Oregon State
+University.
+
+Rather than starting as a fork of the pip codebase, pip2 was written from
+scratch to avoid the unmaintainable mess that would likely result from trying
+to add distutils2/packaging support to pip while maintaining backwards
+compatibility. Our goal is to create a solid, well-tested foundation with very
+basic functionality that can be handed off to the pip maintainers for further
+development. Pip2 currently provides minimal install, uninstall, search and
+freeze commands that use distutils2/packaging under the hood.
+
+See the `pip2 contribution instructions`_ for details on setting up a
+development environment and installing pip2. Note that only Python 3.2 and 3.3
+(currently in alpha) are supported at this time.
+
+.. _distutils2/packaging: http://pypi.python.org/pypi/Distutils2
+.. _pip2 contribution instructions: http://pip2.readthedocs.org/en/latest/dev/contributing.html
+
+Usage
+=====
+
+The following commands are currently supported. Since distutils2/packaging
+aims to maintain backwards compability, these commands should work on projects
+that are packaged with distutils2/packaging as well as with other libraries
+such as distutils, setuptools, and distribute.
+
+
 Install
-=======
+-------
 
-Install one or more packages from PyPi (ignoring dependencies).
+Install one or more projects.
 
-Usage: ``pip2 install <package>...``
 
-Example::
+Usage: ``pip2 install <project>...``
 
-    $ pip2 install package1
-    Successfully installed package1
-    $ pip2 install package2 package3
-    Successfully installed package2 package3
-    $ pip2 install package_that_doesnt_exist_or_fails_to_install
-    Failed to install package_that_doesnt_exist_or_fails_to_install
-    $ pip2 install a-real-package not-a-package
-    Successfully installed a-real-package.
-    Failed to install not-a-package.
+Projects can be installed from the `Python Packaging Index (PyPI)`_::
+
+    $ pip2 install TowelStuff sample-distutils2-project
+    [...]
+    Successfully installed TowelStuff sample-distutils2-project.
+
+.. _Python Packaging Index (PyPI): http://pypi.python.org/pypi
+
+Projects can also be installed from local archives (.zip, .tar.gz, .tar.bz2,
+.tgz, or .tar) or directories::
+
+    $ pip2 install sample-distutils2-project.tar.gz
+    Successfully installed sample-distutils2-project.tar.gz
+
+    $ pip2 install /path/to/TowelStuff
+    Successfully installed /path/to/TowelStuff.
 
 
 Freeze
-======
+------
 
-Display a list of currently-installed packages.
+Display a list of installed projects with their version.
 
 Usage: ``pip2 freeze``
 
 Example::
 
     $ pip2 freeze
-    $ # ...Install a few packages...
-    $ pip2 freeze
-    package1==1.0
-    package2==1.5
-    package3==2.0
+    TowelStuff==0.1.1
+    sample-distutils2-project==1.1.0
 
 
 Search
-======
+------
 
-Search PyPi.
+Search the Python Package Index (PyPI).
 
 Usage: ``pip2 search <query>``
 
 Example::
 
-    $ pip2 search query_with_no_results
-    Search returned no results...
     $ pip2 search pyglet
-    simplui                    - Light-weight GUI toolkit for pyglet
-    svgbatch                   - Loads SVG files into pyglet Batch objects for Open
-                                 GL rendering.
-    Fungus                     - A simple scene based game engine building on pygle
-                                 t.
-    snowui                     - snowui is a fast and simple GUI using pyglet and r
-                                 abbyt.
-    pygarrayimage              - Allow numpy arrays as source of texture data for p
-                                 yglet.
-    gloopy                     - Gloopy is a Python library for creating 3D polyhed
-                                 ra and rendering them using OpenGL. It uses Pyglet
-                                 to open a window and manage events, and PyOpenGL
-                                 for OpenGL bindings.
-    pyglet                     - Cross-platform windowing and multimedia library
+    snowui                     - snowui is a fast and simple GUI using
+                                 pyglet and rabbyt.
+    svgbatch                   - Loads SVG files into pyglet Batch objects
+                                 for OpenGL rendering.
     kytten                     - GUI Framework for Pyglet
-
+    Fungus                     - A simple scene based game engine building
+                                 on pyglet.
+    simplui                    - Light-weight GUI toolkit for pyglet
+    pyglet                     - Cross-platform windowing and multimedia
+                                 library
+    pygarrayimage              - Allow numpy arrays as source of texture
+                                 data for pyglet.
+    gloopy                     - Gloopy is a Python library for creating 3D
+                                 polyhedra and rendering them using OpenGL.
+                                 It uses Pyglet to open a window and manage
+                                 events, and PyOpenGL for OpenGL bindings.
 
 Uninstall
-=========
+---------
 
-Uninstall one or more packages.
+Uninstall one or more projects.
 
-Usage: ``pip2 uninstall <package>...``
+Usage: ``pip2 uninstall <project>...``
 
 Example::
 
-    $ pip2 uninstall package
-    Successfully uninstalled package1
-    $ pip2 uninstall package2 package3
-    Successfully uninstalled package2 package3
-    $ pip2 uninstall package_that_isnt_installed_or_failed_to_uninstall
-    Failed to uninstall package_that_isnt_installed_or_failed_to_uninstall
-
+    $ pip2 uninstall sample-distutils2-project
+    Successfully uninstalled sample-distutils2-project.
