@@ -1,0 +1,9 @@
+language: python
+python:
+  - 3.2
+install:
+  - pip install http://hg.python.org/distutils2/archive/python3.tar.bz2 nose mock
+  - pip install .
+script: nosetests
+env:
+  - PIP_USE_MIRRORS=true

@@ -1,6 +1,8 @@
 Overview
 ========
 
+.. image:: https://secure.travis-ci.org/osupython/pip2.png?branch=develop
+
 The goal of this project is to create a new version of pip built on
 `distutils2/packaging`_ instead of setuptools/distribute. Pip2 is currently
 being developed as part of a senior capstone project at Oregon State
