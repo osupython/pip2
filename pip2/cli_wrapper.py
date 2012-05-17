@@ -21,10 +21,10 @@ def install(args):
     result = pip2.commands.install.install(args.package_list)
 
     if result['installed'] != []:
-        successful = ' '.join(map(str, result['installed']))
+        successful = ', '.join(map(str, result['installed']))
         print('Successfully installed {0}.'.format(successful))
     if result['failed'] != []:
-        failed = ' '.join(map(str, result['failed']))
+        failed = ', '.join(map(str, result['failed']))
         print('Failed to install {0}.'.format(failed))
 
     return
@@ -34,10 +34,10 @@ def uninstall(args):
     result = pip2.commands.uninstall.uninstall(args.package_list)
 
     if result['uninstalled'] != []:
-        successful = ' '.join(map(str, result['uninstalled']))
+        successful = ', '.join(map(str, result['uninstalled']))
         print('Successfully uninstalled {0}.'.format(successful))
     if result['failed'] != []:
-        failed = ' '.join(map(str, result['failed']))
+        failed = ', '.join(map(str, result['failed']))
         print('Failed to uninstall {0}.'.format(failed))
 
     return
