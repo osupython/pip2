@@ -81,6 +81,20 @@ should run these tests frequently as you are modifying the code::
 
     $ nosetests
 
+If the `coverage`_ module is installed (`pip install coverage`), options may be
+provided to nose so that coverage data is generated::
+
+    $ nosetests --with-coverage
+
+Usually only coverage data for pip2 will be needed. To run the coverage tool on
+just the pip2 package::
+
+    $ nosetests --with-coverage --cover-package=pip2
+
+To generate HTML coverage data in the ./cover/ directory::
+
+    $ nosetests --with-coverage --cover-package=pip2 --cover-html
+
 Once your changes are working well in your development environment, `tox`_ can
 be used to run these same tests in a clean environment under multiple versions
 of Python. First, install tox::
@@ -98,6 +112,7 @@ recreated by running `tox --recreate` to get the latest versions of pip2's
 dependencies. Run `tox --help`, visit `tox's website`_, or view the `tox.ini`
 file in pip2's repository for additional information on using tox.
 
+.. _coverage: http://nedbatchelder.com/code/coverage/
 .. _tox: http://tox.readthedocs.org/
 .. _tox's website: http://tox.readthedocs.org/
 
