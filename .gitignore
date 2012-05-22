@@ -25,3 +25,5 @@ pip.log
 *.swp
 RECORD
 .tox
+.coverage
+cover/*
