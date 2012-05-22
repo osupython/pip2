@@ -8,33 +8,33 @@ from pip2.compat import packaging
 @mock.patch.object(packaging.install, 'install')
 class TestInstallAPI():
 
-    def test_install_single_package(self, mock_install):
+    def test_install_single_project(self, mock_install):
         mock_install.return_value = True
-        expected = ['test_package1']
+        expected = ['test_project1']
         result = pip2.commands.install.install(expected)
 
         assert result['installed'] == expected
         assert result['failed'] == []
 
-    def test_install_multiple_packages(self, mock_install):
+    def test_install_multiple_projects(self, mock_install):
         mock_install.return_value = True
-        expected = ['test_package1', 'test_package2', 'test_package3']
+        expected = ['test_project1', 'test_project2', 'test_project3']
         result = pip2.commands.install.install(expected)
 
         assert result['installed'] == expected
         assert result['failed'] == []
 
-    def test_install_fail_single_package(self, mock_install):
+    def test_install_fail_single_project(self, mock_install):
         mock_install.return_value = False
-        expected = ['failing_package']
+        expected = ['failing_project']
         result = pip2.commands.install.install(expected)
 
         assert result['installed'] == []
         assert result['failed'] == expected
 
-    def test_install_fail_multiple_packages(self, mock_install):
+    def test_install_fail_multiple_projects(self, mock_install):
         mock_install.return_value = False
-        expected = ['test_package1', 'test_package2']
+        expected = ['test_project1', 'test_project2']
         result = pip2.commands.install.install(expected)
 
         assert result['installed'] == []
@@ -55,15 +55,15 @@ class TestInstallAPI():
         assert mock_install.called == True
 
     def test_install_mixed_results(self, mock_install):
-        # The current expected behavior is to allow some packages to be
-        # installed even if there other packages fail to install.  In the
+        # The current expected behavior is to allow some projects to be
+        # installed even if there other projects fail to install.  In the
         # future, it will probably be all or nothing.  See issue #51 for more
         # details.
 
         returns = [True, False]
         mock_install.side_effect = lambda *args: returns.pop(0)
-        successes = ['a-real-package']
-        failures = ['not-a-package']
+        successes = ['a-real-project']
+        failures = ['not-a-project']
         result = pip2.commands.install.install(successes + failures)
 
         assert result['installed'] == successes
@@ -73,14 +73,14 @@ class TestInstallAPI():
 @mock.patch.object(packaging.install, 'install')
 class TestInstallCLI():
 
-    def test_install_single_package(self, mock_func):
+    def test_install_single_project(self, mock_func):
         pass
 
-    def test_install_multiple_packages(self, mock_install):
+    def test_install_multiple_projects(self, mock_install):
         pass
 
-    def test_install_fail_single_package(self, mock_install):
+    def test_install_fail_single_project(self, mock_install):
         pass
 
-    def test_install_fail_multiple_packages(self, mock_install):
+    def test_install_fail_multiple_projects(self, mock_install):
         pass

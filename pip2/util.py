@@ -5,6 +5,7 @@ Various utilities used in the commands
 # TODO: Document what each function does and its return value. Difficult to
 # understand some of these.
 
+
 def getTerminalSize():
     import platform
     current_os = platform.system()

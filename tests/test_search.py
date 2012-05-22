@@ -83,7 +83,7 @@ class TestSearchCLI():
     sep_len = len(sep)
     sum_len = term_width - name_len - sep_len - 1
     args = mock.Mock()
-    args.package = 'pkgPlaceholder'
+    args.project = 'pkgPlaceholder'
     originalOut = sys.stdout
 
     def setup(self):
@@ -92,7 +92,7 @@ class TestSearchCLI():
 
     def test_basic_display_no_results(self, mock_search, mock_getTerminalSize):
         result = self.setup()
-        self.args.package = 'nonexistantPackage'
+        self.args.project = 'nonexistantproject'
         mock_getTerminalSize.return_value = (self.term_width, None)
         mock_search.return_value = {}
         expected = 'Search returned no results...\n'
@@ -101,20 +101,20 @@ class TestSearchCLI():
 
     def test_basic_display_name_short(self, mock_search, mock_getTerminalSize):
         result = self.setup()
-        self.args.package = 'shortPackage'
+        self.args.project = 'shortproject'
         mock_getTerminalSize.return_value = (self.term_width, None)
-        mock_search.return_value = {self.args.package: {'summary': 'sum'}}
-        expected = self.args.package
+        mock_search.return_value = {self.args.project: {'summary': 'sum'}}
+        expected = self.args.project
         expected += ' ' * (self.name_len - len(expected)) + self.sep + 'sum\n'
         pip2.cli_wrapper.search(self.args)
         self.tear_down(result.getvalue(), expected)
 
     def test_basic_display_name_long(self, mock_search, mock_getTerminalSize):
         result = self.setup()
-        self.args.package = 'thisIsAVeryLongPackageThatCantDisplayFully'
+        self.args.project = 'thisIsAVeryLongprojectThatCantDisplayFully'
         mock_getTerminalSize.return_value = (self.term_width, None)
-        mock_search.return_value = {self.args.package: {'summary': 'sum'}}
-        expected = self.args.package + self.sep + 'sum'
+        mock_search.return_value = {self.args.project: {'summary': 'sum'}}
+        expected = self.args.project + self.sep + 'sum'
         expected = expected[: (self.sum_len + self.name_len +
                                self.sep_len)] + '\n'
         pip2.cli_wrapper.search(self.args)
@@ -123,42 +123,42 @@ class TestSearchCLI():
     def test_basic_display_sum_single_line(self, mock_search,
                                            mock_getTerminalSize):
         result = self.setup()
-        self.args.package = 'pkgPlaceholder'
+        self.args.project = 'pkgPlaceholder'
         mock_getTerminalSize.return_value = (self.term_width, None)
         desc = 'X' * (self.sum_len)
-        mock_search.return_value = {self.args.package: {'summary': desc}}
-        expected = (self.args.package + ' ' * (self.name_len -
-                    len(self.args.package)) + self.sep + desc + '\n')
+        mock_search.return_value = {self.args.project: {'summary': desc}}
+        expected = (self.args.project + ' ' * (self.name_len -
+                    len(self.args.project)) + self.sep + desc + '\n')
         pip2.cli_wrapper.search(self.args)
         self.tear_down(result.getvalue(), expected)
 
     def test_basic_display_sum_word_wrap(self, mock_search,
                                          mock_getTerminalSize):
         result = self.setup()
-        self.args.package = 'pkgPlaceholder'
+        self.args.project = 'pkgPlaceholder'
         mock_getTerminalSize.return_value = (self.term_width, None)
         desc = 'X' * int(self.sum_len * 1.5)
-        mock_search.return_value = {self.args.package: {'summary': desc}}
+        mock_search.return_value = {self.args.project: {'summary': desc}}
         desc_ln1 = desc[: self.sum_len]
         desc_ln2 = desc[len(desc_ln1):]
-        expected = (self.args.package + ' ' * (self.name_len -
-                    len(self.args.package)) + self.sep + desc_ln1 + '\n' +
+        expected = (self.args.project + ' ' * (self.name_len -
+                    len(self.args.project)) + self.sep + desc_ln1 + '\n' +
                     ' ' * (self.name_len + self.sep_len) + desc_ln2 + '\n')
         pip2.cli_wrapper.search(self.args)
         self.tear_down(result.getvalue(), expected)
 
     def test_basic_display_matches(self, mock_search, mock_getTerminalSize):
         result = self.setup()
-        self.args.package = 'pkgPlaceholder'
+        self.args.project = 'pkgPlaceholder'
         mock_getTerminalSize.return_value = (self.term_width, None)
         installed = '1.0'
         latest = '1.5'
         desc = 'X' * self.sum_len
-        mock_search.return_value = {self.args.package: {'summary': desc,
+        mock_search.return_value = {self.args.project: {'summary': desc,
                                     'installed_version': installed,
                                     'latest_version': latest}}
-        expected = (self.args.package + ' ' * (self.name_len -
-                    len(self.args.package)) + self.sep + desc +
+        expected = (self.args.project + ' ' * (self.name_len -
+                    len(self.args.project)) + self.sep + desc +
                     '\n\tINSTALLED: ' + installed + '\n\tLATEST   : ' +
                     latest + '\n')
         pip2.cli_wrapper.search(self.args)
@@ -180,10 +180,10 @@ class TestSearchCLI():
             else:
                 width_used = self.min_term_width
             self.sum_len = width_used - self.name_len - self.sep_len - 1
-            self._run_all_package_tests()
+            self._run_all_project_tests()
             self.term_width = self.default_term_width
 
-    def _run_all_package_tests(self):
+    def _run_all_project_tests(self):
         self.test_basic_display_no_results()
         self.test_basic_display_name_short()
         self.test_basic_display_name_long()

@@ -13,19 +13,19 @@ class TestFreezeAPI():
     def test_basic_freeze(self, mock_gen):
         # create the distributions that the gen will return
         dis1 = mock.Mock()
-        dis1.name = 'test_package1'
+        dis1.name = 'test_project1'
         dis1.version = '1.0'
         dis2 = mock.Mock()
-        dis2.name = 'test_package2'
+        dis2.name = 'test_project2'
         dis2.version = '2.0'
         dis3 = mock.Mock()
-        dis3.name = 'test_package3'
+        dis3.name = 'test_project3'
         dis3.version = '3.0'
 
         # get_distributions gen returns a iterator over distributions objects
         mock_gen.return_value = iter([dis1, dis2, dis3])
-        expected = {'test_package1': {'version': '1.0'}, 'test_package2':
-                    {'version': '2.0'}, 'test_package3': {'version': '3.0'}}
+        expected = {'test_project1': {'version': '1.0'}, 'test_project2':
+                    {'version': '2.0'}, 'test_project3': {'version': '3.0'}}
         # run the command
         result = pip2.commands.freeze.freeze()
         try:
@@ -48,12 +48,12 @@ class TestFreezeCLI():
     def test_basic_freeze(self, mock_func):
         args = mock.Mock()
         result = self.setup()
-        mock_func.return_value = {'test_package1': {'version': '1.0'},
-                                  'test_package2': {'version': '2.0'},
-                                  'test_package3': {'version': '3.0'}}
+        mock_func.return_value = {'test_project1': {'version': '1.0'},
+                                  'test_project2': {'version': '2.0'},
+                                  'test_project3': {'version': '3.0'}}
         pip2.cli_wrapper.freeze(args)
-        expected = 'test_package1==1.0\ntest_package2==2.0\n' + \
-                   'test_package3==3.0\n'
+        expected = 'test_project1==1.0\ntest_project2==2.0\n' + \
+                   'test_project3==3.0\n'
         self.tear_down(result.getvalue(), expected)
 
     def tear_down(self, result, expected):
