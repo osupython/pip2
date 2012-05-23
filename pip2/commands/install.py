@@ -1,6 +1,8 @@
-"""
-Installs a package and returns a dictionary containing which packages
-were installed successfully or unsuccessfully.
+"""The install command.
+
+This module implements the install command with an interface that matches the
+command line usage.
+
 """
 
 import os
@@ -8,20 +10,40 @@ import os
 from pip2.compat import packaging
 
 
-def install(package_list):
+def install(project_list):
+    """Install a list of projects.
+
+    Note that project dependencies are not yet detected and installed.
+
+    Returns a dictionary with the following keys and values:
+
+    * `'installed'` - a list of strings containing the projects that were
+      successfully installed.
+
+    * `'failed'` - a list of strings containing the projects that failed to
+      install.
+
+    :param project_list: the projects to install.  May be names of projects on
+                         the Python Package Index (PyPI) or paths to local
+                         directories and archives (.zip, .tar.gz, .tar.bz2,
+                         .tgz, or .tar).
+    :type project_list: iterable of strings
+    :rtype: dictionary
+
+    """
     result = {'installed': [], 'failed': []}
 
-    for package in package_list:
+    for project in project_list:
         success = False
 
-        if os.path.exists(package):
-            success = packaging.install.install_local_project(package)
+        if os.path.exists(project):
+            success = packaging.install.install_local_project(project)
         else:
-            success = packaging.install.install(package)
+            success = packaging.install.install(project)
 
         if success:
-            result['installed'].append(package)
+            result['installed'].append(project)
         else:
-            result['failed'].append(package)
+            result['failed'].append(project)
 
     return result

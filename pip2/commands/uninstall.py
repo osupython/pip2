@@ -1,18 +1,35 @@
-"""
-Uninstalls a package and returns a dictionary containing which packages
-were uninstalled successfully or unsuccessfully.
+"""The uninstall command.
+
+This module implements the uninstall command with an interface that matches the
+command line usage.
+
 """
 
 from pip2.compat import packaging
 
 
-def uninstall(package_list):
+def uninstall(project_list):
+    """Uninstall a list of projects.
+
+    Returns a dictionary with the following keys and values:
+
+    * `'uninstalled'` - a list of strings containing the names of the projects
+      that were successfully uninstalled.
+
+    * `'failed'` - a list of strings containing the names of the projects that
+      failed to uninstall.
+
+    :param project_list: the names of the projects to uninstall.
+    :type project_list: iterable of strings
+    :rtype: dictionary
+
+    """
     result = {'uninstalled': [], 'failed': []}
 
-    for package in package_list:
-        if packaging.install.remove(package):
-            result['uninstalled'].append(package)
+    for project in project_list:
+        if packaging.install.remove(project):
+            result['uninstalled'].append(project)
         else:
-            result['failed'].append(package)
+            result['failed'].append(project)
 
     return result
