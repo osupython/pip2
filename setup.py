@@ -11,10 +11,12 @@ version = '0.0.1.dev1'
 install_requires = []
 
 if sys.version_info < (3, 3):
-    # Distutils2 on PyPI doesn't work for Python 3, so we aren't listing it as
-    # a dependency yet (see Github issue 45)
-    #install_requires.append('distutils2')
-    pass
+    # Distutils2 is required for Python versions prior to 3.3, but there is
+    # currently no Python 3 version on PyPI (see GitHub issue 45). For now,
+    # only depend on distutils2 for Python 2; it needs to be installed manually
+    # for Python 3 (prior to 3.3).
+    if sys.version_info < (3,):
+        install_requires.append('distutils2')
 
 
 setup(name="pip2",
