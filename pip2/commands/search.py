@@ -1,25 +1,45 @@
-"""
-Searches the PYPIs for packages based off of
-the 'package' parameter, the default is the http://python.org/pypi index
+"""The search command.
 
-package: search query (usually package name) as string.
+This module implements the search command with an interface that matches the
+command line usage.
 
-return: A dictionary of search results. Key is package name value is dictionary
-        containing information about the package.
 """
 
 import pip2.commands.freeze
 from pip2.compat import packaging
 
 
-def search(package):
-    """
-    Searches the PYPIs for packages based off of
-    the 'package' parameter, the default is the http://python.org/pypi index
+def search(query):
+    """Search projects on the Python Package Index (PyPI).
+
+    Searches the `name` and `summary` fields for projects that match `query`.
+
+    Returns a dictionary containing the search results.  The keys are project
+    names and the values are dictionaries with the following keys and values:
+
+    * `'summary'` - a string containing the project's summary.
+
+    * `'installed_version'` (only present if the project is installed) - a
+      string containing the version of the project currently installed.
+
+    * `'latest_version'` (only present if the project is installed) - a string
+      containing the latest version of the project available on the index.
+
+    For example, the return value may look like this::
+
+        {   'TowelStuff': {   'installed_version': '0.1.1',
+                              'latest_version': '0.1.1',
+                              'summary': 'Useful towel-related stuff.'},
+            'towel': {'summary': 'Keeping you DRY since 2010'}}
+
+    :param query: the search query.
+    :type query: string
+    :rtype: dictionary
+
     """
     results = dict()
     client = packaging.pypi.xmlrpc.Client()
-    projects = client.search_projects(name=package, summary=package)
+    projects = client.search_projects(name=query, summary=query)
     installed = pip2.commands.freeze.freeze()
 
     for project in projects:

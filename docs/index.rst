@@ -7,4 +7,4 @@ Developer Guide
 .. toctree::
    :maxdepth: 2
 
-   dev/contributing
+   dev/index
