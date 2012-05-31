@@ -15,9 +15,11 @@ def main():
     logging.basicConfig(format='%(message)s', level=logging.INFO)
 
     parser = pip2.pip_parser.create_parser()
-
     args = parser.parse_args()
-    args.func(args)
+    try:
+        args.func(args)
+    except AttributeError:
+        parser.print_help()
 
 if __name__ == '__main__':
     main()

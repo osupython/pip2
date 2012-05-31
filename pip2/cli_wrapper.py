@@ -18,26 +18,26 @@ import pip2.util
 
 
 def install(args):
-    result = pip2.commands.install.install(args.package_list)
+    result = pip2.commands.install.install(args.project_list)
 
     if result['installed'] != []:
-        successful = ' '.join(map(str, result['installed']))
+        successful = ', '.join(map(str, result['installed']))
         print('Successfully installed {0}.'.format(successful))
     if result['failed'] != []:
-        failed = ' '.join(map(str, result['failed']))
+        failed = ', '.join(map(str, result['failed']))
         print('Failed to install {0}.'.format(failed))
 
     return
 
 
 def uninstall(args):
-    result = pip2.commands.uninstall.uninstall(args.package_list)
+    result = pip2.commands.uninstall.uninstall(args.project_list)
 
     if result['uninstalled'] != []:
-        successful = ' '.join(map(str, result['uninstalled']))
+        successful = ', '.join(map(str, result['uninstalled']))
         print('Successfully uninstalled {0}.'.format(successful))
     if result['failed'] != []:
-        failed = ' '.join(map(str, result['failed']))
+        failed = ', '.join(map(str, result['failed']))
         print('Failed to uninstall {0}.'.format(failed))
 
     return
@@ -53,7 +53,7 @@ def freeze(args):
 
 
 def search(args):
-    results = pip2.commands.search.search(args.package)
+    results = pip2.commands.search.search(args.project)
     if results == {}:
         print('Search returned no results...')
         return
@@ -76,7 +76,7 @@ def search(args):
         try:
             line = '{0:<{1}}{2}{3}'.format(res, name_len, sep, summary.pop(0))
             line = line[: (term_width - 1)]
-        # international packages have encoding issues, we just skip and move on
+        # international projects have encoding issues, we just skip and move on
         except SystemError:
             print('SKIPPING RESULT: CANNOT DISPLAY UNKNOWN CHARACTERS')
             continue
@@ -104,7 +104,7 @@ def _search_safe_print(string, name=None):
         print(string)
     except UnicodeError:
         if name:
-            # try and print just the package name incase the summary is causing
+            # try and print just the project name incase the summary is causing
             # the exception
             try:
                 print('{0:<{1}}{2}'.format(name, name_len, sep) +

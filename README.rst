@@ -45,7 +45,7 @@ Projects can be installed from the `Python Packaging Index (PyPI)`_::
 
     $ pip2 install TowelStuff sample-distutils2-project
     [...]
-    Successfully installed TowelStuff sample-distutils2-project.
+    Successfully installed TowelStuff, sample-distutils2-project.
 
 .. _Python Packaging Index (PyPI): http://pypi.python.org/pypi
 
