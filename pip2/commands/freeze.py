@@ -28,6 +28,6 @@ def freeze():
     installed = dict()
     for dist in results:
         installed[dist.name] = dict()
-        installed[dist.name]['version'] = dist.version
+        installed[dist.name]['version'] = str(dist.version)
 
     return installed
