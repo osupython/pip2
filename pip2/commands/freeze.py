@@ -6,6 +6,7 @@ command line usage.
 """
 
 from pip2.compat import packaging
+from pip2.log import logger
 
 
 def freeze():
@@ -24,7 +25,11 @@ def freeze():
     :rtype: dictionary
 
     """
-    results = list(packaging.database.get_distributions(use_egg_info=True))
+    try:
+        results = list(packaging.database.get_distributions(use_egg_info=True))
+    except Exception as e:
+        logger.exception(e)
+        raise
     installed = dict()
     for dist in results:
         installed[dist.name] = dict()

@@ -6,6 +6,7 @@ command line usage.
 """
 
 from pip2.compat import packaging
+from pip2.log import logger
 
 
 def uninstall(project_list):
@@ -27,7 +28,12 @@ def uninstall(project_list):
     result = {'uninstalled': [], 'failed': []}
 
     for project in project_list:
-        if packaging.install.remove(project):
+        try:
+            success = packaging.install.remove(project)
+        except Exception as e:
+            logger.exception(e)
+            raise
+        if success:
             result['uninstalled'].append(project)
         else:
             result['failed'].append(project)

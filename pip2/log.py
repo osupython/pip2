@@ -10,10 +10,12 @@ from pip2.locations import default_log_file
 logger = logging.getLogger('pip2')
 
 def setup_logger():
-    logging.basicConfig(format='%(message)s', level=logging.INFO)
+    logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
+    fmtr = logging.Formatter(fmt='%(asctime)-6s: %(name)s - %(levelname)s: ' +
+                             '%(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     hndlr = logging.FileHandler(default_log_file, mode='w')
-    hndlr.setFormatter(fmt='%(asctime)s: %(name)s: %(level)s: %(message)s')
+    hndlr.setFormatter(fmtr)
 
     logger.addHandler(hndlr)
     # since packaging/distutils2 is very heavily intertwined with pip2 its a
