@@ -53,7 +53,7 @@ def search(query):
             if project.name in installed.keys():
                 results[project.name]['installed_version'] = \
                 installed[project.name]['version']
-                results[project.name]['latest_version'] = release.version
+                results[project.name]['latest_version'] = str(release.version)
         else:
             results[project.name]['summary'] = "CANNOT GET SUMMARY"
 
