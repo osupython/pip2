@@ -49,7 +49,7 @@ def uninstall(args):
 
 
 def freeze(args):
-    logger.debug('Running freeze command with args: None'))
+    logger.debug('Running freeze command with args: None')
     distributions = pip2.commands.freeze.freeze()
     dist_names = list(distributions.keys())
     dist_names.sort()

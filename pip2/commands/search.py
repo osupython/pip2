@@ -64,6 +64,8 @@ def search(query):
                 installed[project.name]['version']
                 results[project.name]['latest_version'] = str(release.version)
         else:
+            logger.debug('Project: {0}'.format(project.name) + ' has an ' + \
+                         'irrational version string')
             results[project.name]['summary'] = "CANNOT GET SUMMARY"
 
     return results

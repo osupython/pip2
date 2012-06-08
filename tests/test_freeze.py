@@ -4,6 +4,7 @@ from io import StringIO
 
 import pip2.cli_wrapper
 import pip2.commands.freeze
+import tests.log
 from pip2.compat import mock
 from pip2.compat import packaging
 
@@ -38,11 +39,10 @@ class TestFreezeAPI():
 
 @mock.patch.object(pip2.commands.freeze, 'freeze')
 class TestFreezeCLI():
-    originalOut = sys.stdout
 
-    #capture stdout
+    #capture pip2 CLI output
     def setup(self):
-        sys.stdout = result = StringIO()
+        result = tests.log.setup_logger()
         return result
 
     def test_basic_freeze(self, mock_func):
@@ -63,11 +63,7 @@ class TestFreezeCLI():
             # display newlines for easier comparison
             result = result.replace('\n', '\\n')
             expected = expected.replace('\n', '\\n')
-            output = ('\n\nTEST FAILED' +
-                      '\nFunction: {0}'.format(inspect.stack()[1][3]) +
-                      '\nResult  : {0}\n'.format(result) +
+            output = ('\nResult  : {0}\n'.format(result) +
                       '\nExpected: {0}'.format(expected))
-            print(output, file=sys.stderr)
+            print(output)
             raise
-        finally:
-            sys.stdout = self.originalOut
