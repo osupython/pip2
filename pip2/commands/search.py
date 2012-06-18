@@ -7,6 +7,7 @@ command line usage.
 
 import pip2.commands.freeze
 from pip2.compat import packaging
+from pip2.log import logger
 
 
 def search(query):
@@ -38,8 +39,16 @@ def search(query):
 
     """
     results = dict()
-    client = packaging.pypi.xmlrpc.Client()
-    projects = client.search_projects(name=query, summary=query)
+    try:
+        client = packaging.pypi.xmlrpc.Client()
+    except Exception as e:
+        logger.exception(e)
+        raise
+    try:
+        projects = client.search_projects(name=query, summary=query)
+    except Exception as e:
+        logger.exception(e)
+        raise
     installed = pip2.commands.freeze.freeze()
 
     for project in projects:
@@ -55,6 +64,8 @@ def search(query):
                 installed[project.name]['version']
                 results[project.name]['latest_version'] = str(release.version)
         else:
+            logger.debug('Project: {0}'.format(project.name) + ' has an ' + \
+                         'irrational version string')
             results[project.name]['summary'] = "CANNOT GET SUMMARY"
 
     return results

@@ -6,13 +6,12 @@ Entry point for pip2
 # docs/conf.py
 __version__ = '0.0.1.dev1'
 
-import logging
-
 import pip2.pip_parser
+import pip2.log
 
 
 def main():
-    logging.basicConfig(format='%(message)s', level=logging.INFO)
+    pip2.log.setup_logger()
 
     parser = pip2.pip_parser.create_parser()
     args = parser.parse_args()

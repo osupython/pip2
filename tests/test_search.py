@@ -4,6 +4,7 @@ from io import StringIO
 
 import pip2.commands.freeze
 import pip2.commands.search
+import tests.log
 from pip2.compat import mock
 from pip2.compat import packaging
 
@@ -84,10 +85,9 @@ class TestSearchCLI():
     sum_len = term_width - name_len - sep_len - 1
     args = mock.Mock()
     args.project = 'pkgPlaceholder'
-    originalOut = sys.stdout
 
     def setup(self):
-        sys.stdout = result = StringIO()
+        result = tests.log.setup_logger()
         return result
 
     def test_basic_display_no_results(self, mock_search, mock_getTerminalSize):
@@ -197,20 +197,9 @@ class TestSearchCLI():
         except AssertionError:
             result = result.replace('\n', '\\n')
             expected = expected.replace('\n', '\\n')
-            # tests with non-default terminal sizes are system level, so they
-            # call multiple subtests, we want to know which specific subtest
-            # failed inside the parent
-            if self.term_width == self.default_term_width:
-                parent = 'No Parent'
-            else:
-                parent = inspect.stack()[4][3]
-            output = ('\n\nTEST FAILED' +
-                      '\nFunction  : {0}'.format(inspect.stack()[1][3]) +
-                      '\nParent    : {0}'.format(parent) +
+            output = ('\nUnit test : {0}'.format(inspect.stack()[1][3]) +
                       '\nTerm width: {0}'.format(self.term_width) +
                       '\nResult    : \n{0}\n'.format(result) +
                       '\nExpected  : \n{0}'.format(expected))
-            print(output, file=sys.stderr)
+            print(output)
             raise
-        finally:
-            sys.stdout = self.originalOut

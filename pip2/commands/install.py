@@ -8,6 +8,7 @@ command line usage.
 import os
 
 from pip2.compat import packaging
+from pip2.log import logger
 
 
 def install(project_list):
@@ -36,10 +37,14 @@ def install(project_list):
     for project in project_list:
         success = False
 
-        if os.path.exists(project):
-            success = packaging.install.install_local_project(project)
-        else:
-            success = packaging.install.install(project)
+        try:
+            if os.path.exists(project):
+                success = packaging.install.install_local_project(project)
+            else:
+                success = packaging.install.install(project)
+        except Exception as e:
+            logger.exception(e)
+            raise
 
         if success:
             result['installed'].append(project)
