@@ -10,13 +10,11 @@ version = '0.0.1.dev1'
 
 install_requires = []
 
-if sys.version_info < (3, 3):
-    # Distutils2 is required for Python versions prior to 3.3, but there is
-    # currently no Python 3 version on PyPI (see GitHub issue 45). For now,
-    # only depend on distutils2 for Python 2; it needs to be installed manually
-    # for Python 3 (prior to 3.3).
-    if sys.version_info < (3,):
-        install_requires.append('distutils2')
+# There is currently no Python 3 version of Distutils2 on PyPI (see GitHub
+# issue 45). For now, only depend on distutils2 for Python 2; it needs to be
+# installed manually for Python 3.
+if sys.version_info < (3,):
+    install_requires.append('distutils2')
 
 
 setup(name="pip2",
@@ -30,7 +28,6 @@ setup(name="pip2",
           'Topic :: Software Development :: Build Tools',
           'Programming Language :: Python :: 3',
           'Programming Language :: Python :: 3.2',
-          'Programming Language :: Python :: 3.3',
       ],
       keywords='pip packaging distutils2 easy_install setuptools',
       author='OSUPython Senior Design Team',
