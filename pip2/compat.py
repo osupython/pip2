@@ -8,11 +8,14 @@ try:
     import distutils2.install
     import distutils2.pypi
 except ImportError:
-    # Available in the standard library in Python 3.3+
-    import packaging
-    import packaging.database
-    import packaging.install
-    import packaging.pypi
+    # Initially planned for the Python 3.3 standard library, but yanked out
+    # because it wasn't ready. This is left here in case it goes back in for
+    # Python 3.4.
+    #import packaging
+    #import packaging.database
+    #import packaging.install
+    #import packaging.pypi
+    raise
 
 # Try importing the non-stdlib version of mock first to allow newer versions to
 # override older functionality in the standard library.

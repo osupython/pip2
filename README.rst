@@ -18,8 +18,8 @@ development. Pip2 currently provides minimal install, uninstall, search and
 freeze commands that use distutils2/packaging under the hood.
 
 See the `pip2 contribution instructions`_ for details on setting up a
-development environment and installing pip2. Note that only Python 3.2 and 3.3
-(currently in alpha) are supported at this time.
+development environment and installing pip2. Note that only Python 3.2 is
+supported at this time.
 
 .. _distutils2/packaging: http://pypi.python.org/pypi/Distutils2
 .. _pip2 contribution instructions: http://pip2.readthedocs.org/en/latest/dev/contributing.html

@@ -9,16 +9,14 @@ Contributing with Code
 Supported Python Versions
 -------------------------
 
-Pip2 currently only supports Python 3.2 and 3.3 (scheduled for release in
-August 2012), but there are plans to support versions of Python back to
-2.6-ish.
+Pip2 currently only supports Python 3.2.
 
 Prerequisites
 -------------
 
 The following tools are required:
 
-- Python 3.2 or 3.3 (preferably both)
+- Python 3.2
 - Git
 - pip and virtualenv
 
@@ -42,19 +40,19 @@ fork::
 Installation
 ------------
 
-Create and activate a virtualenv for pip2 development. For example, if you are
-developing with Python 3.2::
+Create and activate a virtualenv for pip2 development. For example::
 
-    $ virtualenv --python=python3.2 pip2-dev-py3.2
-    $ source pip2-dev-py3.2/bin/activate
+    $ virtualenv --python=python3.2 pip2-dev
+    $ source pip2-dev/bin/activate
 
-For versions of Python prior to 3.3, pip2 depends on distutils2 which is often
-`broken`_ and/or outdated on PyPI. For now, just use pip to install from the
-python3 branch of the distutils2 repository::
+Pip2 depends on Distutils2 which currently doesn't have a version for Python 3
+on PyPI (see `issue #45`_). For now, just use pip to install from the
+``python3`` branch of the `Distutils2 repository`_::
 
     $ pip install http://hg.python.org/distutils2/archive/python3.tar.bz2
 
-.. _broken: http://github.com/osupython/pip2/issues/45
+.. _issue #45: http://github.com/osupython/pip2/issues/45
+.. _Distutils2 repository: http://hg.python.org/distutils2/
 
 Install pip2::
 
