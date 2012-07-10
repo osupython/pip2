@@ -117,3 +117,17 @@ Example::
 
     $ pip2 uninstall sample_distutils2_project
     Successfully uninstalled sample_distutils2_project.
+
+As a Library
+------------
+
+The pip2 commands can also be used as a library. For example::
+
+    >>> from pip2.commands.install import install
+    >>> install(['TowelStuff', 'sample_distutils2_project'])
+    {'failed': [], 'installed': ['TowelStuff', 'sample_distutils2_project']}
+
+    >>> from pip2.commands.freeze import freeze
+    >>> freeze()
+    {'TowelStuff': {'version': '0.1.1'},
+     'sample_distutils2_project': {'version': '1.1.0'}}
