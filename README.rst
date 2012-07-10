@@ -60,16 +60,16 @@ Usage: ``pip2 install <project>...``
 
 Projects can be installed from the `Python Packaging Index (PyPI)`_::
 
-    $ pip2 install TowelStuff sample-distutils2-project
-    Successfully installed TowelStuff, sample-distutils2-project.
+    $ pip2 install TowelStuff sample_distutils2_project
+    Successfully installed TowelStuff, sample_distutils2_project.
 
 .. _Python Packaging Index (PyPI): http://pypi.python.org/pypi
 
 Projects can also be installed from local archives (.zip, .tar.gz, .tar.bz2,
 .tgz, or .tar) or directories::
 
-    $ pip2 install sample-distutils2-project.tar.gz
-    Successfully installed sample-distutils2-project.tar.gz
+    $ pip2 install sample_distutils2_project.tar.gz
+    Successfully installed sample_distutils2_project.tar.gz
 
     $ pip2 install /path/to/TowelStuff
     Successfully installed /path/to/TowelStuff.
@@ -85,7 +85,7 @@ Example::
 
     $ pip2 freeze
     TowelStuff==0.1.1
-    sample-distutils2-project==1.1.0
+    sample_distutils2_project==1.1.0
 
 
 Search
@@ -115,5 +115,5 @@ Usage: ``pip2 uninstall <project>...``
 
 Example::
 
-    $ pip2 uninstall sample-distutils2-project
-    Successfully uninstalled sample-distutils2-project.
+    $ pip2 uninstall sample_distutils2_project
+    Successfully uninstalled sample_distutils2_project.
