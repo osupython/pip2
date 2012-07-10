@@ -4,21 +4,32 @@ Overview
 .. image:: https://secure.travis-ci.org/osupython/pip2.png?branch=develop
     :target: http://travis-ci.org/osupython/pip2
 
-The goal of this project is to create a new version of pip built on
-`Distutils2/packaging`_ instead of setuptools/distribute. Pip2 is currently
-being developed as part of a senior capstone project at Oregon State
-University.
+The goal of this project is to create a new version of `pip`_ built on
+`Distutils2/packaging`_ instead of setuptools/distribute. Pip2 currently
+provides very minimal install, uninstall, search and freeze commands that use
+Distutils2/packaging under the hood. Note that this project is still in the
+early stages of development and is nowhere near ready for serious use.
 
 Rather than starting as a fork of the pip codebase, pip2 was written from
 scratch to avoid the unmaintainable mess that would likely result from trying
 to add Distutils2/packaging support to pip while maintaining backwards
-compatibility. Our goal is to create a solid, well-tested foundation with very
+compatibility.
+
+Pip2 was originally developed as part of a 2011-2012 senior capstone project
+at Oregon State University. To limit the scope of the student project, we
+avoided areas that required deep understanding of the Python packaging
+ecosystem. We chose not to go too far into the details of Distutils2 as it was
+still under heavy development and not ready for prime time. We also tried not
+to make important design decisions for pip2.
+
+Instead, our goal was to create a solid, well-tested foundation with very
 basic functionality that can be handed off to the pip maintainers for further
-development. Pip2 currently provides minimal install, uninstall, search and
-freeze commands that use Distutils2/packaging under the hood.
+development. We wanted to keep it simple, get something working and tested,
+let people play with it, and then improve it from there.
 
 Note that only Python 3.2 is supported at this time.
 
+.. _pip: http://www.pip-installer.org/
 .. _Distutils2/packaging: http://pypi.python.org/pypi/Distutils2
 
 Contributing
@@ -121,7 +132,8 @@ Example::
 As a Library
 ------------
 
-The pip2 commands can also be used as a library. For example::
+The pip2 commands can also be used as a library with parameters that match
+those used on the command line. For example::
 
     >>> from pip2.commands.install import install
     >>> install(['TowelStuff', 'sample_distutils2_project'])
