@@ -143,3 +143,7 @@ those used on the command line. For example::
     >>> freeze()
     {'TowelStuff': {'version': '0.1.1'},
      'sample_distutils2_project': {'version': '1.1.0'}}
+
+See the `API Reference`_ for details.
+
+.. _API Reference: http://pip2.readthedocs.org/en/latest/dev/api/index.html
