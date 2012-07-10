@@ -5,21 +5,21 @@ Overview
     :target: http://travis-ci.org/osupython/pip2
 
 The goal of this project is to create a new version of pip built on
-`distutils2/packaging`_ instead of setuptools/distribute. Pip2 is currently
+`Distutils2/packaging`_ instead of setuptools/distribute. Pip2 is currently
 being developed as part of a senior capstone project at Oregon State
 University.
 
 Rather than starting as a fork of the pip codebase, pip2 was written from
 scratch to avoid the unmaintainable mess that would likely result from trying
-to add distutils2/packaging support to pip while maintaining backwards
+to add Distutils2/packaging support to pip while maintaining backwards
 compatibility. Our goal is to create a solid, well-tested foundation with very
 basic functionality that can be handed off to the pip maintainers for further
 development. Pip2 currently provides minimal install, uninstall, search and
-freeze commands that use distutils2/packaging under the hood.
+freeze commands that use Distutils2/packaging under the hood.
 
 Note that only Python 3.2 is supported at this time.
 
-.. _distutils2/packaging: http://pypi.python.org/pypi/Distutils2
+.. _Distutils2/packaging: http://pypi.python.org/pypi/Distutils2
 
 Contributing
 ============
@@ -38,7 +38,7 @@ should create a virtual environment to experiment with it::
     $ virtualenv --python=python3.2 pip2
     $ source pip2/bin/activate
 
-Install distutils2 and pip2::
+Install Distutils2 and pip2::
 
     $ pip install http://hg.python.org/distutils2/archive/python3.tar.bz2
     $ pip install git+https://github.com/osupython/pip2.git
@@ -46,9 +46,9 @@ Install distutils2 and pip2::
 Usage
 =====
 
-The following commands are currently supported. Since distutils2/packaging
+The following commands are currently supported. Since Distutils2/packaging
 aims to maintain backwards compability, these commands should work on projects
-that are packaged with distutils2/packaging as well as with other libraries
+that are packaged with Distutils2/packaging as well as with other libraries
 such as distutils, setuptools, and distribute.
 
 Install
