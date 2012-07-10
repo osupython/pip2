@@ -17,12 +17,31 @@ basic functionality that can be handed off to the pip maintainers for further
 development. Pip2 currently provides minimal install, uninstall, search and
 freeze commands that use distutils2/packaging under the hood.
 
-See the `pip2 contribution instructions`_ for details on setting up a
-development environment and installing pip2. Note that only Python 3.2 is
-supported at this time.
+Note that only Python 3.2 is supported at this time.
 
 .. _distutils2/packaging: http://pypi.python.org/pypi/Distutils2
+
+Contributing
+============
+
+See the `pip2 contribution instructions`_ for details on setting up a
+development environment and contributing to pip2.
+
 .. _pip2 contribution instructions: http://pip2.readthedocs.org/en/latest/dev/contributing.html
+
+Installation
+============
+
+Since pip2 and the supporting packaging libraries are nowhere near stable, you
+should create a virtual environment to experiment with it::
+
+    $ virtualenv --python=python3.2 pip2
+    $ source pip2/bin/activate
+
+Install distutils2 and pip2::
+
+    $ pip install http://hg.python.org/distutils2/archive/python3.tar.bz2
+    $ pip install git+https://github.com/osupython/pip2.git
 
 Usage
 =====
@@ -32,19 +51,16 @@ aims to maintain backwards compability, these commands should work on projects
 that are packaged with distutils2/packaging as well as with other libraries
 such as distutils, setuptools, and distribute.
 
-
 Install
 -------
 
 Install one or more projects.
-
 
 Usage: ``pip2 install <project>...``
 
 Projects can be installed from the `Python Packaging Index (PyPI)`_::
 
     $ pip2 install TowelStuff sample-distutils2-project
-    [...]
     Successfully installed TowelStuff, sample-distutils2-project.
 
 .. _Python Packaging Index (PyPI): http://pypi.python.org/pypi
@@ -57,7 +73,6 @@ Projects can also be installed from local archives (.zip, .tar.gz, .tar.bz2,
 
     $ pip2 install /path/to/TowelStuff
     Successfully installed /path/to/TowelStuff.
-
 
 Freeze
 ------
@@ -90,15 +105,6 @@ Example::
     kytten                     - GUI Framework for Pyglet
     Fungus                     - A simple scene based game engine building
                                  on pyglet.
-    simplui                    - Light-weight GUI toolkit for pyglet
-    pyglet                     - Cross-platform windowing and multimedia
-                                 library
-    pygarrayimage              - Allow numpy arrays as source of texture
-                                 data for pyglet.
-    gloopy                     - Gloopy is a Python library for creating 3D
-                                 polyhedra and rendering them using OpenGL.
-                                 It uses Pyglet to open a window and manage
-                                 events, and PyOpenGL for OpenGL bindings.
 
 Uninstall
 ---------
