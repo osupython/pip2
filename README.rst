@@ -38,7 +38,10 @@ Contributing
 See the `pip2 contribution instructions`_ for details on setting up a
 development environment and contributing to pip2.
 
+A list of known issues can be found in the `pip2 issue tracker`_.
+
 .. _pip2 contribution instructions: http://pip2.readthedocs.org/en/latest/dev/contributing.html
+.. _pip2 issue tracker: https://github.com/osupython/pip2/issues
 
 Installation
 ============
